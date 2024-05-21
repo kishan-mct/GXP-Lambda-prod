@@ -1,8 +1,8 @@
-service: pms-service-child
+service: test-child-hello
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  service_name: pms-service-child
+  service_name: test-kishan
 
 provider:
   name: aws

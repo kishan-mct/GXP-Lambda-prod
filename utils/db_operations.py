@@ -16,7 +16,7 @@ class DBOperations:
         
         lambda_client = boto3.client('lambda')
         response = lambda_client.invoke(
-            FunctionName='arn:aws:lambda:us-east-1:813259119770:function:gxp-service-main-dev-dbConnection',
+            FunctionName='arn:aws:lambda:us-east-1:813259119770:function:test-kishan-dev-dbConnection',
             InvocationType='RequestResponse',
             Payload=payload
         )
