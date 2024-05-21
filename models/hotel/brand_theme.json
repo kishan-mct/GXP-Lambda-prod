@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BrandTheme",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "brand": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "color_setting": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "brand",
+    "name",
+    "color_setting"
+  ],
+  "additionalProperties": false
+}

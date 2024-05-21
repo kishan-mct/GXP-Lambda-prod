@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "EmailNotification",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string"
+        },
+        "email_notification_type": {
+            "type": "string"
+        },
+        "mail_subject": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "mail_content": {
+            "type": "string"
+        },
+        "mail_detail_section": {
+            "type": "array",
+            "default": []
+        }
+    },
+    "required": [
+        "hotel",
+        "email_notification_type"
+    ],
+    "additionalProperties": false
+}

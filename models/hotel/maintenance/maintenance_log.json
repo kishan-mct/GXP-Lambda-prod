@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MaintenanceLog",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "maintenance_detail": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "description": {
+            "type": "string"
+        },
+        "attachment": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_internal": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "maintenance_detail",
+        "description"
+    ],
+    "additionalProperties": false
+}

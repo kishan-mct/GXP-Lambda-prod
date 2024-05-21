@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudExt user app verification</title>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body style="background-color: #fff">
+    <table
+      style="
+        margin: auto;
+        background-color: #f4f4f4;
+        max-width: 620px;
+        width: 100%;
+        padding: 30px 20px 20px;
+        display: block;
+        border-collapse: collapse;
+      "
+      align="center"
+    >
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <div class="header_img">
+              <img
+              src="https://backopsmedia.s3.us-east-1.amazonaws.com/gxp-lock/email-images/logo.png"
+              alt="header_img" style="max-height: 50px" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1 style="font-size:26px;font-weight: 700; margin-bottom: 0px; color: #434245">
+              Confirm your email address
+            </h1>
+            <p style="color: #2d2d2d; font-size:16px">
+              Your confirmation code is below — enter it in your app and you successfully login
+            </p>
+            <div
+              style="
+                background-color: #fff;
+                padding: 16px 0px;
+                margin: 32px 10px;
+              "
+            >
+              <table style="margin: auto">
+                <tr>
+                  <td
+                    style="
+                      vertical-align: middle;
+                      font-size: 30px;
+                      font-weight: 500;
+                      color: #2d2d2d;
+                    "
+                  >
+                      {{ otp_number }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding: 0 0 30px 0; color: #2d2d2d; font-size:16px">
+              If you didn’t request this email, there’s nothing to worry about —
+              you can safely ignore it.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr align="center">
+          <td
+            style="
+              line-height: 0;
+              padding: 6px;
+              border-bottom: 1px solid #2a3856;
+            "
+          >
+            <a
+              href="https://cloudext.com/"
+              target="_blank"
+              style="text-decoration: none"
+            >
+              <i
+                class="fab fa-facebook"
+                style="
+                  padding: 0px 10px 0px 10px;
+                  font-size: 30px;
+                  color: #1976d2;
+                "
+              ></i>
+            </a>
+
+            <a
+              href="https://cloudext.com/"
+              target="_blank"
+              style="text-decoration: none"
+            >
+              <i
+                class="fab fa-twitter-square"
+                style="
+                  padding: 0px 10px 0px 10px;
+                  font-size: 30px;
+                  color: #03a9f4;
+                "
+              ></i>
+            </a>
+
+            <a
+              href="https://cloudext.com/"
+              target="_blank"
+              style="text-decoration: none"
+            >
+              <i
+                class="fab fa-google-plus-square"
+                style="
+                  padding: 0px 10px 0px 10px;
+                  font-size: 30px;
+                  color: #f44336;
+                "
+              ></i>
+            </a>
+
+            <a
+              href="https://cloudext.com/"
+              target="_blank"
+              style="text-decoration: none"
+            >
+              <i
+                class="fab fa-linkedin"
+                style="
+                  padding: 0px 10px 0px 10px;
+                  font-size: 30px;
+                  color: #0077b5;
+                "
+              ></i>
+            </a>
+          </td>
+        </tr>
+        <tr align="center">
+          <td colspan="2">
+            <p
+              style="
+                font-size: 14px;
+                font-weight: 400;
+                margin: 0;
+                letter-spacing: 1px;
+                padding: 6px;
+              "
+            >
+              Copyright | All rights reserved
+            </p>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

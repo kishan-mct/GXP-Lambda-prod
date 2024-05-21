@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SecurityDeposit",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "amount_type": {
+            "type": "string",
+            "enum": [
+                "PBA",
+                "FN"
+            ]
+        },
+        "amount": {
+            "type": "number"
+        },
+        "percentage": {
+            "type": "integer",
+            "enum": [
+                1,
+                2
+            ]
+        },
+        "when_to_authorized": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "when": {
+            "type": "string",
+            "enum": [
+                "AFB",
+                "BCI",
+                "OAK"
+            ]
+        },
+        "is_chargeback_protection": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_re_authorize_in_seven_day": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "id",
+        "booking_source",
+        "amount_type",
+        "amount",
+        "percentage",
+        "when_to_authorized",
+        "when",
+        "is_chargeback_protection",
+        "is_re_authorize_in_seven_day"
+    ],
+    "additionalProperties": false
+}

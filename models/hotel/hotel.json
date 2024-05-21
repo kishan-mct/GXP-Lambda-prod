@@ -1,0 +1,545 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Hotel",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "brand": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "email": {
+            "type": "string",
+            "format": "email"
+        },
+        "name": {
+            "type": "string"
+        },
+        "property_code": {
+            "type": "string",
+            "maxLength": 8
+        },
+        "property_qrcode": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+        },
+        "currency": {
+            "type": "string",
+            "enum": [
+                "USD",
+                "INR"
+            ],
+            "default": "USD"
+        },
+        "app_theme_color": {
+            "type": "string"
+        },
+        "favicon_icon": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "logo": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "guest_xp_bg_image": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "check_in_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "early_check_in_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "check_out_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "late_check_out_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "time_zone": {
+            "type": "string",
+            "enum": [
+                "UCT",
+                "Asia/Kolkata",
+                "America/Adak",
+                "America/Anchorage",
+                "America/Anguilla",
+                "America/Antigua",
+                "America/Araguaina",
+                "America/Argentina/Buenos_Aires",
+                "America/Argentina/Catamarca",
+                "America/Argentina/ComodRivadavia",
+                "America/Argentina/Cordoba",
+                "America/Argentina/Jujuy",
+                "America/Argentina/La_Rioja",
+                "America/Argentina/Mendoza",
+                "America/Argentina/Rio_Gallegos",
+                "America/Argentina/Salta",
+                "America/Argentina/San_Juan",
+                "America/Argentina/San_Luis",
+                "America/Argentina/Tucuman",
+                "America/Argentina/Ushuaia",
+                "America/Aruba",
+                "America/Asuncion",
+                "America/Atikokan",
+                "America/Atka",
+                "America/Bahia",
+                "America/Bahia_Banderas",
+                "America/Barbados",
+                "America/Belem",
+                "America/Belize",
+                "America/Blanc-Sablon",
+                "America/Boa_Vista",
+                "America/Bogota",
+                "America/Boise",
+                "America/Buenos_Aires",
+                "America/Cambridge_Bay",
+                "America/Campo_Grande",
+                "America/Cancun",
+                "America/Caracas",
+                "America/Catamarca",
+                "America/Cayenne",
+                "America/Cayman",
+                "America/Chicago",
+                "America/Chihuahua",
+                "America/Coral_Harbour",
+                "America/Cordoba",
+                "America/Costa_Rica",
+                "America/Creston",
+                "America/Cuiaba",
+                "America/Curacao",
+                "America/Danmarkshavn",
+                "America/Dawson",
+                "America/Dawson_Creek",
+                "America/Denver",
+                "America/Detroit",
+                "America/Dominica",
+                "America/Edmonton",
+                "America/Eirunepe",
+                "America/El_Salvador",
+                "America/Ensenada",
+                "America/Fort_Nelson",
+                "America/Fort_Wayne",
+                "America/Fortaleza",
+                "America/Glace_Bay",
+                "America/Godthab",
+                "America/Goose_Bay",
+                "America/Grand_Turk",
+                "America/Grenada",
+                "America/Guadeloupe",
+                "America/Guatemala",
+                "America/Guayaquil",
+                "America/Guyana",
+                "America/Halifax",
+                "America/Havana",
+                "America/Hermosillo",
+                "America/Indiana/Indianapolis",
+                "America/Indiana/Knox",
+                "America/Indiana/Marengo",
+                "America/Indiana/Petersburg",
+                "America/Indiana/Tell_City",
+                "America/Indiana/Vevay",
+                "America/Indiana/Vincennes",
+                "America/Indiana/Winamac",
+                "America/Indianapolis",
+                "America/Inuvik",
+                "America/Iqaluit",
+                "America/Jamaica",
+                "America/Jujuy",
+                "America/Juneau",
+                "America/Kentucky/Louisville",
+                "America/Kentucky/Monticello",
+                "America/Knox_IN",
+                "America/Kralendijk",
+                "America/La_Paz",
+                "America/Lima",
+                "America/Los_Angeles",
+                "America/Louisville",
+                "America/Lower_Princes",
+                "America/Maceio",
+                "America/Managua",
+                "America/Manaus",
+                "America/Marigot",
+                "America/Martinique",
+                "America/Matamoros",
+                "America/Mazatlan",
+                "America/Mendoza",
+                "America/Menominee",
+                "America/Merida",
+                "America/Metlakatla",
+                "America/Mexico_City",
+                "America/Miquelon",
+                "America/Moncton",
+                "America/Monterrey",
+                "America/Montevideo",
+                "America/Montreal",
+                "America/Montserrat",
+                "America/Nassau",
+                "America/New_York",
+                "America/Nipigon",
+                "America/Nome",
+                "America/Noronha",
+                "America/North_Dakota/Beulah",
+                "America/North_Dakota/Center",
+                "America/North_Dakota/New_Salem",
+                "America/Nuuk",
+                "America/Ojinaga",
+                "America/Panama",
+                "America/Pangnirtung",
+                "America/Paramaribo",
+                "America/Phoenix",
+                "America/Port-au-Prince",
+                "America/Port_of_Spain",
+                "America/Porto_Acre",
+                "America/Porto_Velho",
+                "America/Puerto_Rico",
+                "America/Punta_Arenas",
+                "America/Rainy_River",
+                "America/Rankin_Inlet",
+                "America/Recife",
+                "America/Regina",
+                "America/Resolute",
+                "America/Rio_Branco",
+                "America/Rosario",
+                "America/Santa_Isabel",
+                "America/Santarem",
+                "America/Santiago",
+                "America/Santo_Domingo",
+                "America/Sao_Paulo",
+                "America/Scoresbysund",
+                "America/Shiprock",
+                "America/Sitka",
+                "America/St_Barthelemy",
+                "America/St_Johns",
+                "America/St_Kitts",
+                "America/St_Lucia",
+                "America/St_Thomas",
+                "America/St_Vincent",
+                "America/Swift_Current",
+                "America/Tegucigalpa",
+                "America/Thule",
+                "America/Thunder_Bay",
+                "America/Tijuana",
+                "America/Toronto",
+                "America/Tortola",
+                "America/Vancouver",
+                "America/Virgin",
+                "America/Whitehorse",
+                "America/Winnipeg",
+                "America/Yakutat",
+                "America/Yellowknife",
+                "US/Alaska",
+                "US/Aleutian",
+                "US/Arizona",
+                "US/Central",
+                "US/East-Indiana",
+                "US/Eastern",
+                "US/Hawaii",
+                "US/Indiana-Starke",
+                "US/Michigan",
+                "US/Mountain",
+                "US/Pacific",
+                "US/Pacific-New",
+                "US/Samoa",
+                "UTC"
+            ],
+            "default": "America/New_York"
+        },
+        "time_formate": {
+            "type": "string"
+        },
+        "date_format": {
+            "type": "string"
+        },
+        "date_time_format": {
+            "type": "string"
+        },
+        "custom_question_title": {
+            "type": "string"
+        },
+        "custom_question_sub_title": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "city": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "state": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "zip_code": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "country": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "latitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "longitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "map_location_url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2000
+        },
+        "g_place_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "g_business_detail": {
+            "type": "object"
+        },
+        "website": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2000
+        },
+        "front_desk_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "front_desk_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "whatsapp_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "whatsapp_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "phone_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "phone_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "sms_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "sms_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "emergency_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "emergency_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "front_desk_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "billing_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "manager_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "manager_name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "manager_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "manager_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "manager_designation": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "notes": {
+            "type": "string"
+        },
+        "stripe_customer_id": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "booking_additional_field": {
+            "type": "object",
+            "default": {}
+        },
+        "hotel_directory_setting": {
+            "type": "object",
+            "default": {}
+        },
+        "total_rooms": {
+            "type": "integer",
+            "default": 0
+        },
+        "is_payment_gateway": {
+            "type": "boolean",
+            "default": false
+        },
+        "payment_gateway_type": {
+            "type": "string",
+            "enum": ["Macrotech"]
+        },
+        "pbx_domain_uuid": {
+            "type": "string",
+            "maxLength": 36
+        },
+        "pbx_domain_name": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_default": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_smtp2go_email_enable": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_guest_code_enable": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_guest_code_app_user": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_mobile_key_support": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_pms_connection": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_iot_master_connection": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_bulk_vs_sms_enable": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_chatbot_booking_support": {
+            "type": "boolean",
+            "default": false
+        },
+        "wifi_password": {
+            "type": "string",
+            "maxLength": 30
+        },
+        "is_pbx_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_kiosk_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_lock_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_guest_xp_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_video_bot_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_wifi_service": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "brand",
+        "email",
+        "name",
+        "property_code",
+        "rating",
+        "currency",
+        "app_theme_color",
+        "check_in_time",
+        "early_check_in_time",
+        "check_out_time",
+        "late_check_out_time",
+        "time_zone",
+        "time_formate",
+        "date_format",
+        "date_time_format",
+        "custom_question_title",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "country",
+        "latitude",
+        "longitude",
+        "map_location_url",
+        "front_desk_number",
+        "front_desk_number_iso",
+        "phone_number_iso",
+        "sms_number_iso",
+        "emergency_iso",
+        "is_active",
+        "is_default",
+        "is_smtp2go_email_enable",
+        "is_guest_code_enable",
+        "is_guest_code_app_user",
+        "is_mobile_key_support",
+        "is_pms_connection",
+        "is_iot_master_connection",
+        "is_bulk_vs_sms_enable",
+        "is_chatbot_booking_support",
+        "is_pbx_service",
+        "is_kiosk_service",
+        "is_lock_service",
+        "is_guest_xp_service",
+        "is_video_bot_service",
+        "is_wifi_service"
+    ],
+    "additionalProperties": false
+}

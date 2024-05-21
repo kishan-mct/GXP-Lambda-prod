@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UsbHub",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "model": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "port_config": {
+            "type": "object"
+        },
+        "service_version": {
+            "type": "string",
+            "maxLength": 10,
+            "default": "0"
+        },
+        "firmware_version": {
+            "type": "string",
+            "maxLength": 10,
+            "default": "0"
+        },
+        "auto_connect": {
+            "type": "boolean",
+            "default": true
+        },
+        "service_name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "mqtt_client": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "mqtt_subscribe_topic": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "mqtt_publish_topic": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "setup_link": {
+            "type": "string",
+            "format": "uri"
+        },
+        "hub_config": {
+            "type": "object"
+        }
+    },
+    "required": [
+        "name",
+        "model",
+        "port_config",
+        "service_version",
+        "firmware_version",
+        "auto_connect",
+        "service_name",
+        "setup_link",
+        "hub_config"
+    ],
+    "additionalProperties": false
+}

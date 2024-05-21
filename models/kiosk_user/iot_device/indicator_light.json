@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "IndicatorLight",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "model": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "port_config": {
+            "type": "object"
+        },
+        "service_version": {
+            "type": "string",
+            "maxLength": 10,
+            "default": "0"
+        },
+        "firmware_version": {
+            "type": "string",
+            "maxLength": 10,
+            "default": "0"
+        },
+        "auto_connect": {
+            "type": "boolean",
+            "default": false
+        },
+        "service_name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "mqtt_client": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "mqtt_subscribe_topic": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "mqtt_publish_topic": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "setup_link": {
+            "type": "string",
+            "format": "uri"
+        }
+    },
+    "required": [
+        "name",
+        "model",
+        "port_config",
+        "service_version",
+        "firmware_version",
+        "auto_connect",
+        "service_name",
+        "setup_link"
+    ],
+    "additionalProperties": false
+}

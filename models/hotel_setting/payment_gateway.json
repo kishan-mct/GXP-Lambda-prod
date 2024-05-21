@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PaymentGateway",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "payment_gateway_type": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "account_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "auth_code": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "tran_device_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "online_api_url": {
+            "type": "string",
+            "format": "uri",
+            "default": "https://pay-cert.dcap.com/v2/"
+        },
+        "online_merchant_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "online_merchant_token": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "emv_api_url": {
+            "type": "string",
+            "format": "uri",
+            "default": "https://cloud-test.dcap.com/ProcessEMVTransaction/"
+        },
+        "emv_merchant_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "emv_pos_package_id": {
+            "type": "string",
+            "maxLength": 250,
+            "default": "GuestXP:1.2"
+        },
+        "report_auth_token": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "next_sequence_no": {
+            "type": "integer",
+            "default": 1
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "hotel",
+        "payment_gateway_type",
+        "account_id",
+        "auth_code",
+        "tran_device_id",
+        "emv_merchant_id",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

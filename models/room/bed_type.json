@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BadType",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hotel": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "short_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "hotel",
+    "name",
+    "short_name",
+    "is_active"
+  ],
+  "additionalProperties": false
+}

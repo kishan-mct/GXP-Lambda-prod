@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "EmailLogActivity",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "email_log": {
+        "type": "string"
+      },
+      "event": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "client_device": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "client_os": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "geoip_continent": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "geoip_country": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "geoip_city": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "src_host": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "maxLength": 5000
+      }
+    },
+    "required": ["email_log", "event"],
+    "additionalProperties": false
+  }
+  

@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RoomTypeImage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "is_thumbnail": {
+            "type": "boolean",
+            "default": false
+        },
+        "room_type": {
+            "type": "string"
+        },
+        "image": {
+            "type": "string"
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "is_thumbnail",
+        "room_type",
+        "image",
+        "priority_order"
+    ],  "additionalProperties":false
+
+}

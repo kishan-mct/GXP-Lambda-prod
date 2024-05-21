@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AuthGroup",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 150
+        },
+        "hotel_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "auth_grouppermission": {
+            "type": "object",
+            "properties": {
+                "add_permission": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "remove_permission": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "additionalProperties": false
+}

@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ReservationPayment",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "amount_type": {
+            "type": "string",
+            "enum": [
+                "PBA",
+                "FN"
+            ]
+        },
+        "percentage": {
+            "type": "integer",
+            "enum": [
+                1,
+                2
+            ]
+        },
+        "when_to_authorized": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "when": {
+            "type": "string",
+            "enum": [
+                "AFB",
+                "BCI",
+                "OAK"
+            ]
+        },
+        "is_chargeback_protection": {
+            "type": "boolean",
+            "default": false
+        },
+        "remaining_payment_when_to_authorized": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "remaining_payment_when": {
+            "type": "string",
+            "enum": [
+                "AFB",
+                "BCI",
+                "OAK"
+            ]
+        },
+        "is_remaining_payment_chargeback_protection": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "booking_source",
+        "amount_type",
+        "percentage",
+        "when_to_authorized",
+        "when",
+        "remaining_payment_when_to_authorized",
+        "remaining_payment_when"
+    ],
+    "additionalProperties": false
+}

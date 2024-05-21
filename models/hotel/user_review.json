@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UserReview",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "guest": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "mobile": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "email": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "review_type": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "star": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+        },
+        "description": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        }
+    },
+    "required": [
+        "hotel",
+        "review_type",
+        "star"
+    ],
+    "additionalProperties": false
+}

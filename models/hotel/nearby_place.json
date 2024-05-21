@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "NearByPlace",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "place_category": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "description": {
+            "type": "string"
+        },
+        "is_favorite": {
+            "type": "boolean",
+            "default": false
+        },
+        "g_place_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "g_rating": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "g_user_ratings_total": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "g_address": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "g_phone_number": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "g_opening_time": {
+            "type": "string"
+        },
+        "g_latitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "g_longitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "g_distance": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "g_website": {
+            "type": "string",
+            "maxLength": 2000
+        },
+        "g_map_url": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "g_business_detail": {
+            "type": "object",
+            "default": {}
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "hotel",
+        "name"
+    ],
+    "additionalProperties": false
+}

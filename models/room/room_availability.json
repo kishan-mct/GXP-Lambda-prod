@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RoomAvailability",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string"
+        },
+        "room_type": {
+            "type": "string"
+        },
+        "day_name": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "day_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "total_room": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "available_room": {
+            "type": "integer"
+        }
+    },
+    "required": [
+        "hotel",
+        "room_type",
+        "day_name",
+        "day_date",
+        "total_room",
+        "available_room"
+    ],  "additionalProperties":false
+
+}

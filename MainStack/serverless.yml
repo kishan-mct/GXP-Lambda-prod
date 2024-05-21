@@ -1,0 +1,298 @@
+service: gxp-service-main
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+  region: us-east-1
+  layers:
+    - arn:aws:lambda:us-east-1:813259119770:layer:GXP-Lambda:1
+
+  apiGateway:
+    apiKeys:
+      - ${self:provider.environment.MY_API_KEY}
+
+  environment:
+    MY_API_KEY: ${self:service}_apikey_${opt:stage, self:provider.stage}
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:*
+            - lambda:*
+          Resource: "*"
+
+package:
+  include:
+    - ../utils/**
+    - ../common/**
+    - ../templates/**
+
+custom:
+  corsConfig:
+    origin: '*'
+    headers:
+      - Content-Type
+      - X-Api-Key
+      - authorization
+
+  authorizerConfig:
+    name: jwtAuthorizer
+    resultTtlInSeconds: 0
+    identitySource: method.request.header.Authorization
+  
+  jwtEnvironment:
+    JWT_SECRET: gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-
+
+
+
+functions:
+  # lambda helth check function
+  lambdaHealthCheck:
+    handler: common.lambda_health.lambdaHealthCheck
+    events:
+      - http:
+          path: health-check
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Api-Key
+
+
+  # JWT Authentication
+  jwtAuthorizer:
+    handler: common.jwt_auth.jwtAuthorizer
+    timeout: 10
+    environment: ${self:custom.jwtEnvironment}
+  
+  # Database Connection
+  dbConnection:
+    handler: common.db_conenction.dbConnection
+    timeout: 20
+
+  # Users auth login
+  userAuthLogin:
+    handler: user.auth_user.userAuthLogin
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: user/login
+          method: post
+          request:
+            schemas:
+              application/json: ${file(../models/user/auth_user/login.json)}
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Api-Key
+      - http:
+          path: user/login
+          method: patch
+          request:
+            schemas:
+              application/json: ${file(../models/user/auth_user/login.json)}
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Api-Key
+
+  # Users get new access token by his referesh token
+  userGetAccessTokebByRefereshToken:
+    handler: user.auth_user.userGetAccessTokebByRefereshToken
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: user/access-token
+          method: post
+          cors: ${self:custom.corsConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/auth_user/get_access_token.json)}
+
+
+  # User access all hotel list & detail
+  userAccessHotelListDetail:
+    handler: user.auth_user.userAccessHotelListDetail
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: user/hotel
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/hotel/{hotel_id}
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+  
+
+  # Users APIS
+  userProfileGetUpdate:
+    handler: user.user.userProfileGetUpdate
+    events:
+      - http:
+          path: user/profile
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/profile
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/user/user_profile_update.json)}
+
+
+  userListCreate:
+    handler: user.user.userListCreate
+    events:
+      - http:
+          path: user/user
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/user    
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/user/create_user.json)}
+          
+
+  userRetrieveUpdateDestroy:
+    handler: user.user.userRetrieveUpdateDestroy
+    events:
+      - http:
+          path: user/user/{id}
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/user/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/user/update_user.json)}
+      - http:
+          path: user/user/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  
+
+   ## app-content-type ##
+  
+  
+  ## Auth Permission APIs ##
+
+  # App content type
+  authAppContentTypeListCreateUpdateDestroy:
+    handler: auth_permission.auth_appcontenttype.authAppContentTypeListCreateUpdateDestroy
+    events:
+      - http:
+          path: auth-permission/app-content-type
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: auth-permission/app-content-type
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_appcontenttype.json)}
+      - http:
+          path: auth-permission/app-content-type/{auth_appcontenttype_id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_appcontenttype.json)}
+      - http:
+          path: auth-permission/app-content-type/{auth_appcontenttype_id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+
+  # App permission
+  authPermissionListCreateUpdateDestroy:
+    handler: auth_permission.auth_permission.authPermissionListCreateUpdateDestroy
+    events:
+      - http:
+          path: auth-permission/auth-permission
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: auth-permission/auth-permission
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_permission.json)}
+      - http:
+          path: auth-permission/auth-permission/{auth_permission_id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_permission.json)}
+      - http:
+          path: auth-permission/auth-permission/{auth_permission_id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+
+  # Auth group
+  authGroupListCreateUpdateDestroy:
+    handler: auth_permission.auth_group.authGroupListCreateUpdateDestroy
+    events:
+      - http:
+          path: auth-permission/auth-group
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: auth-permission/auth-group
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_group.json)}
+      - http:
+          path: auth-permission/auth-group/{auth_group_id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/auth_permission/auth_group.json)}
+      - http:
+          path: auth-permission/auth-group/{auth_group_id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+

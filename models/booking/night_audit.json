@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "NightAudit",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "audit_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "next_audit_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "check_in": {
+            "type": "integer"
+        },
+        "check_out": {
+            "type": "integer"
+        },
+        "total_in_house": {
+            "type": "integer"
+        },
+        "total_stay_guest": {
+            "type": "integer"
+        },
+        "no_show": {
+            "type": "integer"
+        },
+        "extend": {
+            "type": "integer"
+        },
+        "house_keeping": {
+            "type": "integer"
+        }
+    },
+    "required": [
+        "id",
+        "hotel",
+        "audit_date",
+        "next_audit_date",
+        "check_in",
+        "check_out",
+        "total_in_house",
+        "total_stay_guest",
+        "no_show",
+        "extend",
+        "house_keeping"
+    ],
+    "additionalProperties": false
+}

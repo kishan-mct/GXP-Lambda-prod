@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MaintenanceDetail",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "maintenance_issue": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "room": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "guest": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "ticket_number": {
+            "type": "integer"
+        },
+        "title": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "description": {
+            "type": "string"
+        },
+        "assigned_by": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "status": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "pending",
+                "Assigned",
+                "In Progress",
+                "Completed",
+                "Re Open"
+            ],
+            "default": "pending"
+        },
+        "priority": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "normal",
+                "Urgent",
+                "High"
+            ],
+            "default": "normal"
+        },
+        "attachment": {
+            "type": "string",
+            "maxLength": 250,
+            "format": "uri"
+        }
+    },
+    "required": [
+        "hotel",
+        "title",
+        "description",
+        "status",
+        "priority"
+    ],
+    "additionalProperties": false
+}

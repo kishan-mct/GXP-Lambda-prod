@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TaxRule",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "fee_type": {
+            "type": "string",
+            "maxLength": 250,
+            "enum": [
+                "Percent",
+                "Fix Amount"
+            ]
+        },
+        "amount_or_percent": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "rule_applied": {
+            "type": "string",
+            "maxLength": 250,
+            "enum": [
+                "At Booking",
+                "At Arrival"
+            ]
+        },
+        "rule_type": {
+            "type": "string",
+            "maxLength": 250,
+            "enum": [
+                "per room per stay",
+                "abc"
+            ]
+        },
+        "priority_order": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "is_active": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "fee_type",
+        "amount_or_percent",
+        "rule_applied",
+        "rule_type",
+        "priority_order",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

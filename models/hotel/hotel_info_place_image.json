@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "HotelInfoPlaceImage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "is_thumbnail": {
+            "type": "boolean",
+            "default": false
+        },
+        "hotel_info_place": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "image": {
+            "type": "string",
+            "format": "binary",
+            "maxLength": 250
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "is_thumbnail",
+        "hotel_info_place",
+        "image",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

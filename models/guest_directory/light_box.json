@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LightBox",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "page_to_display_type": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "click_open_page": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "click_open_page_type": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "page_to_display": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "after_second_display": {
+            "type": "integer",
+            "default": 0
+        },
+        "is_one_time_display": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_mandatory": {
+            "type": "boolean",
+            "default": false
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "is_one_time_display",
+        "is_active",
+        "is_mandatory",
+        "image"
+    ],
+    "additionalProperties": false
+}

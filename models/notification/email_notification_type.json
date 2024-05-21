@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "EmailNotificationType",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "app_notification_group": {
+            "type": "string"
+        },
+        "mail_code": {
+            "type": "integer",
+            "minimum": 101,
+            "maximum": 999
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "description": {
+            "type": "string"
+        },
+        "form_company_mail_user": {
+            "type": "string",
+            "format": "email"
+        },
+        "is_recipient": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "subject": {
+            "type": "string"
+        },
+        "mail_body": {
+            "type": "string"
+        },
+        "detail_section_table": {
+            "type": "array",
+            "default": []
+        },
+        "action_button": {
+            "type": "array",
+            "default": []
+        },
+        "templet_variable": {
+            "type": "string"
+        },
+        "is_active": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "mail_code",
+        "name",
+        "description",
+        "form_company_mail_user",
+        "is_recipient",
+        "subject",
+        "mail_body",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

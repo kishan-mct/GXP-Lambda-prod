@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Room",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string"
+        },
+        "building": {
+            "type": "string"
+        },
+        "floor": {
+            "type": "string"
+        },
+        "room_type": {
+            "type": "string"
+        },
+        "booking": {
+            "type": "string"
+        },
+        "room_number": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "connect_room_number": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "hd_qrcode": {
+            "type": "string"
+        },
+        "is_accessible": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_pet_friendly": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_smoking": {
+            "type": "boolean",
+            "default": false
+        },
+        "occupancy_status": {
+            "type": "string",
+            "maxLength": 5
+        },
+        "occupancy_reason": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "hk_status": {
+            "type": "string",
+            "maxLength": 5
+        }
+    },
+    "required": [
+        "hotel",
+        "building",
+        "floor",
+        "room_type",
+        "room_number",
+        "is_accessible",
+        "is_pet_friendly",
+        "is_smoking",
+        "occupancy_status",
+        "hk_status"
+    ],  "additionalProperties":false
+
+}

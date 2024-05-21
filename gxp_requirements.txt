@@ -1,0 +1,24 @@
+
+1. User sign up (Hotel Owner by Emial & verify by OTP)
+2. Add hotel from gooogle, booking.con, expidia (ALL Meta data download in background)
+3. Genrate PWA Website & select the domain
+4. verify hotel by super admin
+5. payment gateway setup
+6. Invite hotel staff user bake in his role & permissions
+7. Create new booking
+8. Checking process (web checkin)
+9. Dispaly my booking
+10. Display all hotel directory Website
+11. APP marketplace 
+    - GuestXP Lock
+    - Kiosk
+    - OTA Intigration
+    - Reputaion monitor
+    - Google Hotel intigrations
+    - OTA intigrations
+    - PMS Intigrationa
+    - Housekeeping APP
+    - Audit APP
+    - UPSELL & Addons
+
+

@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TvChannelInfo",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "tv_channel_category": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "channel_number": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "description": {
+            "type": "string"
+        },
+        "image": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_favorite": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "hotel",
+        "tv_channel_category",
+        "name"
+    ],
+    "additionalProperties": false
+}

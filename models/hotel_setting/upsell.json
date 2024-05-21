@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Upsell",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hotel": {
+      "type": "string"
+    },
+    "booking_source": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "short_name": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "short_description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "price": {
+      "type": "number",
+      "maximum": 999999999999999.99,
+      "minimum": -999999999999999.99
+    },
+    "price_type": {
+      "type": "string",
+      "maxLength": 20,
+      "enum": [
+        "Percentage",
+        "amount"
+      ]
+    },
+    "base_on": {
+      "type": "string",
+      "maxLength": 20,
+      "enum": [
+        "Booking",
+        "Item"
+      ]
+    },
+    "period": {
+      "type": "string",
+      "maxLength": 20,
+      "enum": [
+        "One Time",
+        "Daily"
+      ]
+    },
+    "when_can_purchase": {
+      "type": "array",
+      "default": [],
+      "items": {}
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_mandatory": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_approval_required": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_premium_upsell": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_view_on_folio": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "hotel",
+    "title",
+    "short_name",
+    "price",
+    "price_type",
+    "base_on",
+    "period",
+    "is_active",
+    "is_mandatory",
+    "is_approval_required",
+    "is_premium_upsell",
+    "is_view_on_folio",
+    "is_deleted"
+  ],
+  "additionalProperties": false
+}

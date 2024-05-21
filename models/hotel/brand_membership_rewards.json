@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MembershipRewardsBrand",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "image": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 500
+        },
+        "terms_and_conditions": {
+            "type": "string"
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "name",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

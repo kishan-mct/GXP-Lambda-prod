@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "HotelDirectoryHeaderImage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "image": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_default_image": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_bg_image": {
+            "type": "boolean",
+            "default": false
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "hotel",
+        "image",
+        "is_default_image",
+        "is_bg_image",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

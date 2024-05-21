@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MaintenanceIssue",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "icon": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "hotel",
+        "name"
+    ],
+    "additionalProperties": false
+}

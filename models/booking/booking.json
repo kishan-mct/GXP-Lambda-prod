@@ -1,0 +1,360 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Booking",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "reference_no": {
+            "type": "string",
+            "maxLength": 8
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "guest_type": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "individual",
+                "company"
+            ],
+            "default": "individual"
+        },
+        "company": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "room_type": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "primary_guest": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "guest": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        },
+        "default_credit_card": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source_reference_no": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "ota_reference_no": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "pms_url": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "qrcode_image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        },
+        "bill_to": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "guest",
+                "company"
+            ],
+            "default": "guest"
+        },
+        "currency": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "USD",
+                "INR"
+            ],
+            "default": "USD"
+        },
+        "status": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "UNew BookingSD",
+                "Pre Checkin",
+                "Pre Checked Done",
+                "Reservation",
+                "Due In-Hold",
+                "Confirmed",
+                "Due In",
+                "Checked In",
+                "Due Out",
+                "Checked Out",
+                "Cancelled",
+                "No Show"
+            ],
+            "default": "New Booking"
+        },
+        "contract_signature": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        },
+        "additional_field": {
+            "type": "object",
+            "default": {}
+        },
+        "notes": {
+            "type": "string"
+        },
+        "stay_night": {
+            "type": "integer",
+            "default": 0
+        },
+        "check_in_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "check_in_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "check_out_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "check_out_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "total_guest": {
+            "type": "integer",
+            "default": 0
+        },
+        "total_adults": {
+            "type": "integer",
+            "default": 0
+        },
+        "total_children": {
+            "type": "integer",
+            "default": 0
+        },
+        "allotted_room": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "rate_plan": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hk_type": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "Light",
+                "Heavy",
+                "Regular",
+                "Self"
+            ],
+            "default": "Regular"
+        },
+        "vehical_number": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "hk_green_opt_in": {
+            "type": "boolean",
+            "default": true
+        },
+        "reservation_charge": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "other_charge": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "total_charge": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "total_payment": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "total_refund": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "current_balance": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "security_deposit": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "security_deposit_on_hold": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "security_deposit_use_to_pay": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "security_deposit_released": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "is_send_pre_check_in_email": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_answer_question_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_room_allocate_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_pre_checkin_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_credit_card_select_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_payment_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_security_deposit_done": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_booking_guarantee": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_read": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_dnd": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_mobile_key_support": {
+            "type": "boolean",
+            "default": false
+        },
+        "dnd_updated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "guarantee_type": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "Credit Card",
+                "Debit Card",
+                "Prepaid",
+                "Booking Source",
+                "Cash"
+            ]
+        },
+        "last_visit_by_guest": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "device_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "device_type": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "device_ip_address": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "fingerprint_js_data": {
+            "type": "object",
+            "default": {}
+        }
+    },
+    "required": [
+        "reference_no",
+        "hotel",
+        "guest_type",
+        "booking_source",
+        "room_type",
+        "primary_guest",
+        "bill_to",
+        "currency",
+        "status",
+        "stay_night",
+        "check_in_date",
+        "check_in_time",
+        "check_out_date",
+        "total_guest",
+        "total_adults",
+        "total_children",
+        "allotted_room",
+        "rate_plan",
+        "hk_type",
+        "vehical_number",
+        "hk_green_opt_in",
+        "reservation_charge",
+        "other_charge",
+        "total_charge",
+        "total_payment",
+        "total_refund",
+        "current_balance",
+        "security_deposit",
+        "security_deposit_on_hold",
+        "security_deposit_use_to_pay",
+        "security_deposit_released",
+        "is_send_pre_check_in_email",
+        "is_answer_question_done",
+        "is_room_allocate_done",
+        "is_pre_checkin_done",
+        "is_credit_card_select_done",
+        "is_payment_done",
+        "is_security_deposit_done",
+        "is_booking_guarantee",
+        "is_read",
+        "is_dnd",
+        "is_mobile_key_support",
+        "dnd_updated_at",
+        "guarantee_type",
+        "last_visit_by_guest",
+        "device_id",
+        "device_type",
+        "device_ip_address",
+        "fingerprint_js_data"
+    ],
+    "additionalProperties": false
+}

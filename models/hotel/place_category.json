@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PlaceCategory",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "image": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_delete": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "image",
+        "is_delete",
+        "is_active",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

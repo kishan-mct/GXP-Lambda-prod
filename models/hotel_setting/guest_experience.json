@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "GuestExperience",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "checkin_guest_experience": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "hotel",
+        "checkin_guest_experience",
+        "is_active",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

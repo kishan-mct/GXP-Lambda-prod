@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UrlShorten",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string"
+        },
+        "url_hash": {
+            "type": "string",
+            "maxLength": 50,
+            "index": true
+        },
+        "full_url": {
+            "type": "string"
+        },
+        "url_type": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "clicks": {
+            "type": "integer",
+            "default": 0
+        },
+        "click_devices": {
+            "type": "array",
+            "default": [],
+            "items": {}
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "url_hash",
+        "full_url",
+        "url_type",
+        "clicks",
+        "click_devices",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

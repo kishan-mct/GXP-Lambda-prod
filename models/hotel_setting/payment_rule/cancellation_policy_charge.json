@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CancellationPolicyCharge",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "cancellation_policy": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "cancellation_fee": {
+            "type": "string",
+            "enum": [
+                "Percentage",
+                "Flat Fee"
+            ]
+        },
+        "cancelled_within": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "flat_fee": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0
+        }
+    },
+    "required": [
+        "id",
+        "cancellation_policy",
+        "cancellation_fee",
+        "cancelled_within",
+        "flat_fee"
+    ],
+    "additionalProperties": false
+}

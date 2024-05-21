@@ -1,0 +1,143 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Kiosk",
+    "type": "object",
+    "properties": {
+        "kiosk_login_code": {
+            "type": "string",
+            "maxLength": 8
+        },
+        "kiosk_code_refreshed_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "kiosk_machine_number": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "kiosk_model_type": {
+            "type": "string",
+            "maxLength": 100,
+            "default": "clara"
+        },
+        "main_page_buttons": {
+            "type": "object"
+        },
+        "check_in_features": {
+            "type": "object"
+        },
+        "check_out_features": {
+            "type": "object"
+        },
+        "walk_in_features": {
+            "type": "object"
+        },
+        "collect_key_features": {
+            "type": "object"
+        },
+        "languages_supported": {
+            "type": "object"
+        },
+        "iot_device_config": {
+            "type": "object"
+        },
+        "is_audio_prompt": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_language_support": {
+            "type": "boolean",
+            "default": false
+        },
+        "epp_type": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "epp_tran_device_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "epp_mac_address": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "epp_ip_address": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "receipt_template": {
+            "type": "string"
+        },
+        "dispense_key_type": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "max_key_dispense": {
+            "type": "integer",
+            "default": 2
+        },
+        "key_dispenser_url": {
+            "type": "string",
+            "format": "uri"
+        },
+        "key_encoder_url": {
+            "type": "string",
+            "format": "uri"
+        },
+        "video_meet_platform": {
+            "type": "string",
+            "maxLength": 250,
+            "default": "jitsi"
+        },
+        "meet_token": {
+            "type": "string",
+            "maxLength": 500,
+            "default": "vpaas-magic-cookie-0e791abbadeb4077a4471cbd4f67d198"
+        },
+        "meet_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_out_of_service": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_virtual_mode": {
+            "type": "boolean",
+            "default": false
+        },
+        "bg_slider_status": {
+            "type": "boolean",
+            "default": false
+        },
+        "bg_image": {
+            "type": "string",
+            "format": "uri"
+        },
+        "flash_video": {
+            "type": "string",
+            "format": "uri"
+        },
+        "self_kiosk_flash_video": {
+            "type": "string",
+            "format": "uri"
+        }
+    },
+    "required": [
+        "kiosk_machine_number",
+        "kiosk_model_type",
+        "main_page_buttons",
+        "check_in_features",
+        "check_out_features",
+        "walk_in_features",
+        "collect_key_features",
+        "languages_supported",
+        "iot_device_config",
+        "video_meet_platform",
+        "meet_token",
+        "is_out_of_service",
+        "is_virtual_mode",
+        "bg_slider_status"
+    ],
+    "additionalProperties": false
+}

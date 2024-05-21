@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "HdPageImage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "is_thumbnail": {
+            "type": "boolean",
+            "default": false
+        },
+        "hd_page": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "is_thumbnail",
+        "hd_page",
+        "image"
+    ],
+    "additionalProperties": false
+}

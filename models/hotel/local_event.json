@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LocalEvent",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "description": {
+            "type": "string",
+            "default": ""
+        },
+        "start_time": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "start_time_display": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "end_time": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "end_time_display": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "date_label": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "display_price_label": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "categories": {
+            "type": "array",
+            "default": []
+        },
+        "image": {
+            "type": "string",
+            "maxLength": 500,
+            "format": "uri"
+        },
+        "address": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "ticket_link": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "location_map_url": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "gid": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "description",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

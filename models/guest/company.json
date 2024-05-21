@@ -1,0 +1,144 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Company",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255
+        },
+        "mobile": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "mobile_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "address_line_first": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "address_line_second": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "zip_code": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "city": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "country": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        },
+        "contact_designation": {
+            "type": "string",
+            "maxLength": 250,
+            "enum": [
+                "Ceo",
+                "Account Team"
+            ]
+        },
+        "contact_email": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "contact_name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "contact_mobile": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "contact_mobile_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "contract_doc": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        },
+        "special_notes": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "company_type": {
+            "type": "string",
+            "maxLength": 250,
+            "enum": [
+                "Agent",
+                "Ota"
+            ]
+        },
+        "total_booking": {
+            "type": "integer",
+            "default": 0
+        },
+        "total_guest": {
+            "type": "integer",
+            "default": 0
+        },
+        "opening_balance": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "debit_total": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "credit_total": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "total_balance": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        }
+    },
+    "required": [
+        "id",
+        "hotel",
+        "name",
+        "email",
+        "mobile_iso",
+        "contact_designation",
+        "company_type"
+    ],
+    "additionalProperties": false
+}

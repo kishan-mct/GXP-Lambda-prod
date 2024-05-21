@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserProfileUpdate",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "last_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "mobile": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "mobile_iso": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "paswword": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "gender": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "profile_picture": {
+      "type": "string"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date"
+    },
+    "address_line_first": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "address_line_second": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "zip_code": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "special_notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

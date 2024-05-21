@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AppFeature",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "feature_code": {
+            "type": "integer",
+            "minimum": 101,
+            "maximum": 999
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 200
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "icon": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "price": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "price_type": {
+            "type": "string",
+            "enum": [
+                "Per Month",
+                "Per Shift"
+            ],
+            "default": "Per Month"
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "feature_code",
+        "name",
+        "icon",
+        "price",
+        "price_type",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

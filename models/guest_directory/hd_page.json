@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "HdPage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "sub_pages": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "slug_name": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "page_template_type": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "page_level": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "description": {
+            "type": "string"
+        },
+        "icon": {
+            "type": "string",
+            "maxLength": 200
+        },
+        "page_condition": {
+            "type": "array",
+            "default": []
+        },
+        "redirect_url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 1000
+        },
+        "is_favorite": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 250
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "page_template_type",
+        "page_level",
+        "is_favorite",
+        "is_active",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

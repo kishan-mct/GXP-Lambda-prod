@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UserAuthLogin",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "data"
+    ],
+    "additionalProperties": false
+}

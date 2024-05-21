@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "BookingSource",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 200
+        },
+        "image": {
+            "type": "string",
+            "maxLength": 250,
+            "format": "uri"
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_credit_card_validation": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_reservation_payment": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_security_deposit": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_cancellation_policy": {
+            "type": "boolean",
+            "default": false
+        },
+        "total_booking": {
+            "type": "integer",
+            "default": 0
+        },
+        "opening_balance": {
+            "type": "number",
+            "default": 0.00
+        },
+        "debit_total": {
+            "type": "number",
+            "default": 0.00
+        },
+        "credit_total": {
+            "type": "number",
+            "default": 0.00
+        },
+        "total_balance": {
+            "type": "number",
+            "default": 0.00
+        }
+    },
+    "required": [
+        "hotel",
+        "name",
+        "is_active",
+        "is_credit_card_validation",
+        "is_reservation_payment",
+        "is_security_deposit",
+        "is_cancellation_policy",
+        "total_booking",
+        "opening_balance",
+        "debit_total",
+        "credit_total",
+        "total_balance"
+    ],
+    "additionalProperties": false
+}

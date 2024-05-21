@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Guest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hotel": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "company": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 255
+    },
+    "mobile": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "mobile_iso": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "first_name": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "last_name": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "date_of_birth": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "gender": {
+      "type": "string",
+      "maxLength": 20,
+      "enum": [
+        "Agender",
+        "Bigender",
+        "Female",
+        "Genderqueer",
+        "Male",
+        "Non-bianry",
+        "Ploygender"
+      ]
+    },
+    "address_line_first": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "address_line_second": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "zip_code": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "special_notes": {
+      "type": "string"
+    },
+    "selfie_image": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "selfie_image_status": {
+      "type": "string",
+      "maxLength": 10,
+      "enum": [
+        "Pending",
+        "Upload",
+        "Verify",
+        "Reject"
+      ],
+      "default": "Pending"
+    },
+    "selfie_image_status_change_reason": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "selfie_image_match_with_doc_score": {
+      "type": "number",
+      "format": "decimal",
+      "maximum": 999999999999999999.99,
+      "default": 0.00
+    },
+    "selfie_image_aws_face_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "doc_image": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_backside_image": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_image_status": {
+      "type": "string",
+      "maxLength": 10,
+      "enum": [
+        "Pending",
+        "Upload",
+        "Verify",
+        "Reject"
+      ],
+      "default": "Pending"
+    },
+    "doc_image_status_change_reason": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "is_doc_image_verify_by_ocr": {
+      "type": "boolean",
+      "default": false
+    },
+    "doc_guest_name": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_ocr_text": {
+      "type": "object"
+    },
+    "doc_type": {
+      "type": "string",
+      "maxLength": 50,
+      "enum": [
+        "Driving Licence",
+        "Passport",
+        "Other"
+      ],
+      "default": "Other"
+    },
+    "doc_number": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_issue_date": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_expire_date": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "doc_issued_by": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "total_booking": {
+      "type": "integer",
+      "default": 0
+    },
+    "opening_balance": {
+      "type": "number",
+      "format": "decimal",
+      "maximum": 999999999999999999.99,
+      "default": 0.00
+    },
+    "debit_total": {
+      "type": "number",
+      "format": "decimal",
+      "maximum": 999999999999999999.99,
+      "default": 0.00
+    },
+    "credit_total": {
+      "type": "number",
+      "format": "decimal",
+      "maximum": 999999999999999999.99,
+      "default": 0.00
+    },
+    "total_balance": {
+      "type": "number",
+      "format": "decimal",
+      "maximum": 999999999999999999.99,
+      "default": 0.00
+    },
+    "is_add_card": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_premium_guest": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_add_blacklist": {
+      "type": "boolean",
+      "default": false
+    },
+    "device_id": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "device_type": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "device_ip_address": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "fingerprint_js_data": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "hotel",
+    "first_name",
+    "last_name",
+    "total_booking",
+    "opening_balance",
+    "debit_total",
+    "credit_total",
+    "total_balance",
+    "is_add_card",
+    "is_premium_guest",
+    "is_add_blacklist"
+  ],
+  "additionalProperties": false
+}

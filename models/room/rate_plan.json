@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RatePlanRoomTypePrice",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "rate_plan_room_type": {
+            "type": "string"
+        },
+        "day_name": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "day_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "room_price": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0
+        },
+        "is_sale": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_arrival": {
+            "type": "boolean",
+            "default": true
+        },
+        "is_departure": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "rate_plan_room_type",
+        "day_name",
+        "day_date",
+        "room_price",
+        "is_sale",
+        "is_arrival",
+        "is_departure"
+    ],  "additionalProperties":false
+
+}

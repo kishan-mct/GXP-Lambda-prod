@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FloorImage",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "floor": {
+            "type": "string"
+        },
+        "is_thumbnail": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_floor_plan": {
+            "type": "boolean",
+            "default": false
+        },
+        "image": {
+            "type": "string"
+        },
+        "priority_order": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "required": [
+        "floor",
+        "image",
+        "priority_order"
+    ],
+    "additionalProperties": false
+}

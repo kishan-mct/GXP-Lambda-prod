@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AuthPermission",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "app_content_type_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "codename": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "is_super": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "name",
+        "app_content_type_id",
+        "codename"
+    ],
+    "additionalProperties": false
+}

@@ -1,0 +1,236 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FolioTransaction",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "charge_type": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "credit_card": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "payment_batch_summary": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "upsell_order": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "debit": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "credit": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "balance": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "amount_authorized": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "amount_received": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "amount_released": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "amount_refunded": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 999999999999999999.99,
+            "default": 0.00
+        },
+        "schedule": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "status": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "UNew BookingSD",
+                "Pre Checkin",
+                "Pre Checked Done",
+                "Reservation",
+                "Due In-Hold",
+                "Confirmed",
+                "Due In",
+                "Checked In",
+                "Due Out",
+                "Checked Out",
+                "Cancelled",
+                "No Show"
+            ],
+            "default": "New Booking"
+        },
+        "transaction_type": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "Charge",
+                "Deposit",
+                "Payment"
+            ]
+        },
+        "currency": {
+            "type": "string",
+            "maxLength": 50,
+            "enum": [
+                "USD",
+                "INR"
+            ],
+            "default": "USD"
+        },
+        "gateway_cmd_status": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_authorize": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_ref_no": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "gateway_invoice_no": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_sequence_no": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_dsix_return_code": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "gateway_acq_ref_data": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "gateway_capture_status": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_pay_api_id": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_process_data": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "gateway_record_no": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "gateway_response_origin": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_tran_code": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_user_trace": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_auth_code": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_trans_device_id": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "gateway_transaction_method": {
+            "type": "string",
+            "enum": [
+                "emv",
+                "online",
+                "other"
+            ],
+            "default": "other"
+        },
+        "description": {
+            "type": "string"
+        },
+        "comment": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "is_chargeback_protection": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_re_authorize_in_seven_day": {
+            "type": "boolean",
+            "default": false
+        },
+        "last_payment_error_code": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "last_payment_error_message": {
+            "type": "string",
+            "maxLength": 2000
+        },
+        "is_reverse_transaction": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_view_payment_tab": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "id",
+        "booking",
+        "charge_type",
+        "debit",
+        "credit",
+        "balance",
+        "amount_authorized",
+        "amount_received",
+        "amount_released",
+        "amount_refunded",
+        "schedule",
+        "status",
+        "transaction_type",
+        "currency",
+        "description"
+    ],
+    "additionalProperties": false
+}

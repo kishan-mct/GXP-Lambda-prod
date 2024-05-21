@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RolePermission",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "role": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "menu": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "page": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "is_view": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_add": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_update": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_delete": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "role",
+        "menu",
+        "page"
+    ],
+    "additionalProperties": false
+}

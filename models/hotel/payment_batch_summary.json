@@ -1,0 +1,83 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PaymentBatchSummary",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "kiosk_user": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "operator_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "user_trace": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "merchant_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "terminal_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "batch_no": {
+            "type": "integer"
+        },
+        "batch_item_count": {
+            "type": "integer",
+            "default": 0
+        },
+        "net_batch_total": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "credit_purchase_count": {
+            "type": "integer",
+            "default": 0
+        },
+        "credit_purchase_amount": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "credit_return_count": {
+            "type": "integer",
+            "default": 0
+        },
+        "credit_return_amount": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "debit_purchase_count": {
+            "type": "integer",
+            "default": 0
+        },
+        "debit_purchase_amount": {
+            "type": "number",
+            "format": "decimal"
+        },
+        "debit_return_count": {
+            "type": "integer",
+            "default": 0
+        },
+        "debit_return_amount": {
+            "type": "number",
+            "format": "decimal"
+        }
+    },
+    "required": [
+        "hotel",
+        "batch_no"
+    ],
+    "additionalProperties": false
+}

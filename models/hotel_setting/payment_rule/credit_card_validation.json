@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CreditCardValidation",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_source": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "amount_type": {
+            "type": "string",
+            "maxLength": 30
+        },
+        "amount": {
+            "type": "number",
+            "format": "decimal",
+            "default": 0.00
+        },
+        "percentage": {
+            "type": "string",
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "when_to_authorized": {
+            "type": "string",
+            "enum": [
+                "Immediately",
+                "1 Hour"
+            ]
+        },
+        "is_chargeback_protection": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_re_authorize_in_seven_day": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "booking_source",
+        "amount_type",
+        "amount",
+        "percentage",
+        "when_to_authorized",
+        "is_chargeback_protection",
+        "is_re_authorize_in_seven_day"
+    ],
+    "additionalProperties": false
+}
