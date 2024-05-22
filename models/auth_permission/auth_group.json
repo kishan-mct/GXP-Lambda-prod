@@ -7,10 +7,6 @@
             "type": "string",
             "maxLength": 150
         },
-        "hotel_id": {
-            "type": "string",
-            "format": "uuid"
-        },
         "auth_grouppermission": {
             "type": "object",
             "properties": {

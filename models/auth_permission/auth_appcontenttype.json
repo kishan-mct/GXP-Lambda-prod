@@ -3,10 +3,6 @@
   "title": "AuthAppContentType",
   "type": "object",
   "properties": {
-    "id": {
-      "type": "string",
-      "format": "uuid"
-    },
     "app_label": {
       "type": "string",
       "maxLength": 100
@@ -14,6 +10,9 @@
     "model": {
       "type": "string",
       "maxLength": 100
+    },
+    "is_super": {
+      "type": "boolean"
     }
   },
   "required": [

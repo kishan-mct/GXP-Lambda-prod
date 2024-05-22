@@ -12,6 +12,8 @@ def authPermissionListCreateUpdateDestroy(event, context):
     status_code = 200
     query_result = {"status": False, "message": ""}
     http_method = event['httpMethod']
+    user_data = json.loads(event['requestContext']['authorizer']['user_data'])
+    hotel_id = user_data.get("hotel_id")
 
     try:
         if http_method == 'GET':
@@ -28,11 +30,19 @@ def authPermissionListCreateUpdateDestroy(event, context):
                 "json_build_object('id', apc.id, 'app_label', apc.app_label, 'model', apc.model) AS auth_appcontenttype "
             ]
             
+            condition = "1=1"
             if 'ap.id' in multi_value_qp:
                 id = multi_value_qp.pop('ap.id')[0]
-                query_result = gxp_db.get_query(table, columns, condition="ap.id=%s", params=(id,))
+                condition += f" AND ap.id={id}"
+                if hotel_id:
+                    condition += " AND ap.is_super=False"
+                
+                query_result = gxp_db.get_query(table, columns, condition=condition)
             else:
-                query_result = gxp_db.select_query(table, columns, page_size=page_size, page_number=page_number, order_by=order_by)
+                if hotel_id:
+                    condition += " AND ap.is_super=False"
+                
+                query_result = gxp_db.select_query(table, columns, condition=condition, page_size=page_size, page_number=page_number, order_by=order_by)
 
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))

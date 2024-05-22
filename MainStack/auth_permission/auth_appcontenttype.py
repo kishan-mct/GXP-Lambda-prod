@@ -19,28 +19,62 @@ def authAppContentTypeListCreateUpdateDestroy(event, context):
             page_size = multi_value_qp.pop('page_size', [None])[0]
             page_number = multi_value_qp.pop('page_number', [1])[0]
             order_by = multi_value_qp.pop('order_by', ["model", "app_label"])[0]
-            
+            get_columns = multi_value_qp.pop('column', "*")
+
             if 'id' in multi_value_qp:
                 id = multi_value_qp.pop('id')[0]
-                query_result = gxp_db.get_query("auth_appcontenttype", "*", condition="id=%s", params=(id,))
+                query_result = gxp_db.get_query("auth_appcontenttype", get_columns, condition="id=%s", params=(id,))
             else:
-                query_result = gxp_db.select_query("auth_appcontenttype", "*", order_by=order_by, page_size=page_size, page_number=page_number)
+                query_result = gxp_db.select_query("auth_appcontenttype", get_columns, order_by=order_by, page_size=page_size, page_number=page_number)
 
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
             app_label = request_body.get('app_label')
             model = request_body.get('model')
+            is_super = request_body.pop('is_super', False)
             
             existing_record = gxp_db.get_query("auth_appcontenttype", ["app_label", "model"], condition="LOWER(app_label)=LOWER(%s) AND LOWER(model)=LOWER(%s)", 
                                                params=(app_label, model)).get("data")
             if existing_record:
                 query_result["message"] = f"app_label {app_label} in {model} model already exists."
             else:
-                request_body['id'] = str(uuid.uuid4())
+                request_body["id"] = str(uuid.uuid4())
                 query_result = gxp_db.insert_query("auth_appcontenttype", request_body)
 
                 if query_result['status']:
-                    query_result = gxp_db.get_query("auth_appcontenttype", "*", "id=%s", params=(id,))
+                    auth_permission_list = [
+                        {
+                            "id": str(uuid.uuid4()),
+                            "app_content_type_id": request_body["id"],
+                            "name": f"Can add {model}",
+                            "codename": f"add_{model}",
+                            "is_super": is_super
+                        },
+                        {
+                            "id": str(uuid.uuid4()),
+                            "app_content_type_id": request_body["id"],
+                            "name": f"Can change {model}",
+                            "codename": f"change_{model}",
+                            "is_super": is_super
+                        },
+                        {
+                            "id": str(uuid.uuid4()),
+                            "app_content_type_id": request_body["id"],
+                            "name": f"Can delete {model}",
+                            "codename": f"delete_{model}",
+                            "is_super": is_super
+                        },
+                        {
+                            "id": str(uuid.uuid4()),
+                            "app_content_type_id": request_body["id"],
+                            "name": f"Can view {model}",
+                            "codename": f"view_{model}",
+                            "is_super": is_super
+                        }
+                    ]
+                    gxp_db.bulk_insert_query("auth_permission", auth_permission_list)
+                    
+                    query_result = gxp_db.get_query("auth_appcontenttype", "*", "id=%s", params=(request_body["id"],))
                     
         elif http_method == 'PATCH':
             auth_appcontenttype_id = event['pathParameters']['auth_appcontenttype_id']
@@ -59,6 +93,7 @@ def authAppContentTypeListCreateUpdateDestroy(event, context):
 
         elif http_method == 'DELETE':
             auth_appcontenttype_id = event['pathParameters']['auth_appcontenttype_id']
+            gxp_db.delete_query("auth_permission", condition="app_content_type_id=%s", params=(auth_appcontenttype_id,))
             query_result = gxp_db.delete_query("auth_appcontenttype", condition="id=%s", params=(auth_appcontenttype_id,))  
 
         else:

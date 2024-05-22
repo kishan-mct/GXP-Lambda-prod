@@ -74,73 +74,73 @@
     "LambdaHealthCheckLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-lambdaHealthCheck"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-lambdaHealthCheck"
       }
     },
     "JwtAuthorizerLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-jwtAuthorizer"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-jwtAuthorizer"
       }
     },
     "DbConnectionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-dbConnection"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-dbConnection"
       }
     },
     "UserAuthLoginLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userAuthLogin"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userAuthLogin"
       }
     },
     "UserGetAccessTokebByRefereshTokenLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userGetAccessTokebByRefereshToken"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userGetAccessTokebByRefereshToken"
       }
     },
     "UserAccessHotelListDetailLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userAccessHotelListDetail"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userAccessHotelListDetail"
       }
     },
     "UserProfileGetUpdateLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userProfileGetUpdate"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userProfileGetUpdate"
       }
     },
     "UserListCreateLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userListCreate"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userListCreate"
       }
     },
     "UserRetrieveUpdateDestroyLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-userRetrieveUpdateDestroy"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-userRetrieveUpdateDestroy"
       }
     },
     "AuthAppContentTypeListCreateUpdateDestroyLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-authAppContentTypeListCreateUpdateDestroy"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-authAppContentTypeListCreateUpdateDestroy"
       }
     },
     "AuthPermissionListCreateUpdateDestroyLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-authPermissionListCreateUpdateDestroy"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-authPermissionListCreateUpdateDestroy"
       }
     },
     "AuthGroupListCreateUpdateDestroyLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/test-kishan-dev-authGroupListCreateUpdateDestroy"
+        "LogGroupName": "/aws/lambda/gxp-service-main-dev-authGroupListCreateUpdateDestroy"
       }
     },
     "IamRoleLambdaExecution": {
@@ -168,7 +168,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "test-kishan",
+                  "gxp-service-main",
                   "dev",
                   "lambda"
                 ]
@@ -186,7 +186,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/test-kishan-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/gxp-service-main-dev*:*"
                     }
                   ]
                 },
@@ -197,7 +197,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/test-kishan-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/gxp-service-main-dev*:*:*"
                     }
                   ]
                 },
@@ -218,7 +218,7 @@
           "Fn::Join": [
             "-",
             [
-              "test-kishan",
+              "gxp-service-main",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -236,16 +236,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "common.lambda_health.lambdaHealthCheck",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-lambdaHealthCheck",
+        "FunctionName": "gxp-service-main-dev-lambdaHealthCheck",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -269,16 +269,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "common.jwt_auth.jwtAuthorizer",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-jwtAuthorizer",
+        "FunctionName": "gxp-service-main-dev-jwtAuthorizer",
         "MemorySize": 1024,
         "Timeout": 10,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev",
+            "MY_API_KEY": "gxp-service-main_apikey_dev",
             "JWT_SECRET": "gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-"
           }
         },
@@ -303,16 +303,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "common.db_conenction.dbConnection",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-dbConnection",
+        "FunctionName": "gxp-service-main-dev-dbConnection",
         "MemorySize": 1024,
         "Timeout": 20,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -336,16 +336,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.auth_user.userAuthLogin",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userAuthLogin",
+        "FunctionName": "gxp-service-main-dev-userAuthLogin",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev",
+            "MY_API_KEY": "gxp-service-main_apikey_dev",
             "JWT_SECRET": "gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-"
           }
         },
@@ -370,16 +370,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.auth_user.userGetAccessTokebByRefereshToken",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userGetAccessTokebByRefereshToken",
+        "FunctionName": "gxp-service-main-dev-userGetAccessTokebByRefereshToken",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev",
+            "MY_API_KEY": "gxp-service-main_apikey_dev",
             "JWT_SECRET": "gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-"
           }
         },
@@ -404,16 +404,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.auth_user.userAccessHotelListDetail",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userAccessHotelListDetail",
+        "FunctionName": "gxp-service-main-dev-userAccessHotelListDetail",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev",
+            "MY_API_KEY": "gxp-service-main_apikey_dev",
             "JWT_SECRET": "gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-"
           }
         },
@@ -438,16 +438,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.user.userProfileGetUpdate",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userProfileGetUpdate",
+        "FunctionName": "gxp-service-main-dev-userProfileGetUpdate",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -471,16 +471,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.user.userListCreate",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userListCreate",
+        "FunctionName": "gxp-service-main-dev-userListCreate",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -504,16 +504,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "user.user.userRetrieveUpdateDestroy",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-userRetrieveUpdateDestroy",
+        "FunctionName": "gxp-service-main-dev-userRetrieveUpdateDestroy",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -537,16 +537,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "auth_permission.auth_appcontenttype.authAppContentTypeListCreateUpdateDestroy",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-authAppContentTypeListCreateUpdateDestroy",
+        "FunctionName": "gxp-service-main-dev-authAppContentTypeListCreateUpdateDestroy",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -570,16 +570,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "auth_permission.auth_permission.authPermissionListCreateUpdateDestroy",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-authPermissionListCreateUpdateDestroy",
+        "FunctionName": "gxp-service-main-dev-authPermissionListCreateUpdateDestroy",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -603,16 +603,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/test-kishan/dev/1716288529655-2024-05-21T10:48:49.655Z/test-kishan.zip"
+          "S3Key": "serverless/gxp-service-main/dev/1716351398102-2024-05-22T04:16:38.102Z/gxp-service-main.zip"
         },
         "Handler": "auth_permission.auth_group.authGroupListCreateUpdateDestroy",
         "Runtime": "python3.9",
-        "FunctionName": "test-kishan-dev-authGroupListCreateUpdateDestroy",
+        "FunctionName": "gxp-service-main-dev-authGroupListCreateUpdateDestroy",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MY_API_KEY": "test-kishan_apikey_dev"
+            "MY_API_KEY": "gxp-service-main_apikey_dev"
           }
         },
         "Role": {
@@ -629,130 +629,130 @@
         "AuthGroupListCreateUpdateDestroyLogGroup"
       ]
     },
-    "LambdaHealthCheckLambdaVersionopTLZrBhoEjWMVbsfYAOa8x3I0Zh58i8MTgWAodAFQ": {
+    "LambdaHealthCheckLambdaVersionL705qva89apAp6gg4TBmrTgEE2dyBsz3kCYHYAQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LambdaHealthCheckLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "JwtAuthorizerLambdaVersionQlfFtaVnh5IkSvFnnYq6p7Yo9GPdrJSEiMvOL2tjLo": {
+    "JwtAuthorizerLambdaVersion8xfWUD8z1u7izk1yextPrfhE87tGVeYnD3uArxA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "JwtAuthorizerLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "DbConnectionLambdaVersionL8FVtXkUYF9KfmXuipADb6UOInzsPMRkV7b7xWaniKA": {
+    "DbConnectionLambdaVersionabUX55L62OUB366F2GVmRefMkoMP8QLklK57g8jBtpA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DbConnectionLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserAuthLoginLambdaVersionBbgNpAXoeK3jmMPsu0Wfo4rz5K9PtHfeo2Mcpv40": {
+    "UserAuthLoginLambdaVersionK5O2UIg24MMhhXTb9zzENaAGqHppAmtGvEEwqGJaY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserAuthLoginLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserGetAccessTokebByRefereshTokenLambdaVersion4lhmITIno1CjoNvjCjMA5kRqX3dWZOE009gErQ7uo": {
+    "UserGetAccessTokebByRefereshTokenLambdaVersionv1VBRykoSSFL4xGoqpPP5EyjWhxGXJPo09GnoOcrPmU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserGetAccessTokebByRefereshTokenLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserAccessHotelListDetailLambdaVersionXRgDPVzDfbYRP3REtIT8riZ3juyYKuJvZO88Nd5Zd4": {
+    "UserAccessHotelListDetailLambdaVersion96A48A4zextBGShES89FbLMwRvcyjfqdMC13fYjbWYU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserAccessHotelListDetailLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserProfileGetUpdateLambdaVersion4RupUaHv1443ITROoKEZtggS4h6Ul3Wj8vGfxAhZM60": {
+    "UserProfileGetUpdateLambdaVersionqAKXYuF1WNIExbQiyz7w0orLvO2Wm4xqYs47xrBdCvQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserProfileGetUpdateLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserListCreateLambdaVersionNNrAWlb1LZ0uRlfNnvvGnw1a3RFbqm0qemFJ6S3aAjY": {
+    "UserListCreateLambdaVersionFOf9WGCXnYH7IS0IkqHKJQSlwDRP0sLrJgbtSguWlTM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserListCreateLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "UserRetrieveUpdateDestroyLambdaVersionpLLFDqtjhecfUU0iVqHOQHmgE0Mbcm63R9CU8Ev3ik": {
+    "UserRetrieveUpdateDestroyLambdaVersionqrVwdrPHgNh8OL6o3hc1Aiilf21MIPdrFnG20RCDw0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserRetrieveUpdateDestroyLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "AuthAppContentTypeListCreateUpdateDestroyLambdaVersionmMB9vnhFoPDEFRi5LPZHKTHxLFM9rW0cg61OqWZJGc": {
+    "AuthAppContentTypeListCreateUpdateDestroyLambdaVersionvUmFd878bOqBAhWv9Xjlq6MT8lLcq1Eq5kXuPg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthAppContentTypeListCreateUpdateDestroyLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "AuthPermissionListCreateUpdateDestroyLambdaVersionYDOZA9NRDDcUbYUHMbz56S7dFP2V5QshywbCBvLo": {
+    "AuthPermissionListCreateUpdateDestroyLambdaVersionVNCFSGpPQwg4bBPxXwOdGEKP4GujVjqm6jyIXnoUTM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthPermissionListCreateUpdateDestroyLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
-    "AuthGroupListCreateUpdateDestroyLambdaVersionXnDlj3b1wBrOsfMLOmDmhZJiePtcLbl6k6vsGpuTQ0": {
+    "AuthGroupListCreateUpdateDestroyLambdaVersionf1p7djBdrJ1xVGXwmimhxYUdlmxptoWuUPom8Cjo45g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthGroupListCreateUpdateDestroyLambdaFunction"
         },
-        "CodeSha256": "olbD8Xq+dOPGg7IZuSOO5mVULNN6mFgk5wO3X2krIm0="
+        "CodeSha256": "Rxr7ZHbgLXG0wFH7iyJbza4Kk7pgMaoDk/7N3dcWGII="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-test-kishan",
+        "Name": "dev-gxp-service-main",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -1680,7 +1680,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -1734,7 +1734,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -1788,7 +1788,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -1992,7 +1992,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2098,7 +2098,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2204,7 +2204,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2359,7 +2359,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2416,7 +2416,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2571,7 +2571,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2628,7 +2628,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2783,7 +2783,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2840,7 +2840,7 @@
         },
         "MethodResponses": [],
         "RequestValidatorId": {
-          "Ref": "ApiGatewayTestkishanRequestValidator"
+          "Ref": "ApiGatewayGxpservicemainRequestValidator"
         },
         "RequestModels": {
           "application/json": {
@@ -2901,7 +2901,7 @@
         "JwtAuthorizerApiGatewayAuthorizer"
       ]
     },
-    "ApiGatewayTestkishanRequestValidator": {
+    "ApiGatewayGxpservicemainRequestValidator": {
       "Type": "AWS::ApiGateway::RequestValidator",
       "Properties": {
         "RestApiId": {
@@ -2909,7 +2909,7 @@
         },
         "ValidateRequestBody": true,
         "ValidateRequestParameters": true,
-        "Name": "test-kishan-dev | Validate request body and querystring parameters"
+        "Name": "gxp-service-main-dev | Validate request body and querystring parameters"
       }
     },
     "ApiGatewayMethodUserLoginPostApplicationJsonModel": {
@@ -3320,10 +3320,6 @@
           "title": "AuthAppContentType",
           "type": "object",
           "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
             "app_label": {
               "type": "string",
               "maxLength": 100
@@ -3331,6 +3327,9 @@
             "model": {
               "type": "string",
               "maxLength": 100
+            },
+            "is_super": {
+              "type": "boolean"
             }
           },
           "required": [
@@ -3353,10 +3352,6 @@
           "title": "AuthAppContentType",
           "type": "object",
           "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
             "app_label": {
               "type": "string",
               "maxLength": 100
@@ -3364,6 +3359,9 @@
             "model": {
               "type": "string",
               "maxLength": 100
+            },
+            "is_super": {
+              "type": "boolean"
             }
           },
           "required": [
@@ -3472,10 +3470,6 @@
               "type": "string",
               "maxLength": 150
             },
-            "hotel_id": {
-              "type": "string",
-              "format": "uuid"
-            },
             "auth_grouppermission": {
               "type": "object",
               "properties": {
@@ -3518,10 +3512,6 @@
             "name": {
               "type": "string",
               "maxLength": 150
-            },
-            "hotel_id": {
-              "type": "string",
-              "format": "uuid"
             },
             "auth_grouppermission": {
               "type": "object",
@@ -3585,7 +3575,7 @@
         "Type": "TOKEN"
       }
     },
-    "ApiGatewayDeployment1716288517224": {
+    "ApiGatewayDeployment1716351386548": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -3639,7 +3629,7 @@
       "Type": "AWS::ApiGateway::ApiKey",
       "Properties": {
         "Enabled": true,
-        "Name": "test-kishan_apikey_dev",
+        "Name": "gxp-service-main_apikey_dev",
         "StageKeys": [
           {
             "RestApiId": {
@@ -3649,11 +3639,11 @@
           }
         ]
       },
-      "DependsOn": "ApiGatewayDeployment1716288517224"
+      "DependsOn": "ApiGatewayDeployment1716351386548"
     },
     "ApiGatewayUsagePlan": {
       "Type": "AWS::ApiGateway::UsagePlan",
-      "DependsOn": "ApiGatewayDeployment1716288517224",
+      "DependsOn": "ApiGatewayDeployment1716351386548",
       "Properties": {
         "ApiStages": [
           {
@@ -3663,8 +3653,8 @@
             "Stage": "dev"
           }
         ],
-        "Description": "Usage plan for test-kishan dev stage",
-        "UsagePlanName": "test-kishan-dev"
+        "Description": "Usage plan for gxp-service-main dev stage",
+        "UsagePlanName": "gxp-service-main-dev"
       }
     },
     "ApiGatewayUsagePlanKey1": {
@@ -4093,115 +4083,115 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-gxp-service-main-dev-ServerlessDeploymentBucketName"
       }
     },
     "LambdaHealthCheckLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LambdaHealthCheckLambdaVersionopTLZrBhoEjWMVbsfYAOa8x3I0Zh58i8MTgWAodAFQ"
+        "Ref": "LambdaHealthCheckLambdaVersionL705qva89apAp6gg4TBmrTgEE2dyBsz3kCYHYAQ"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-LambdaHealthCheckLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-LambdaHealthCheckLambdaFunctionQualifiedArn"
       }
     },
     "JwtAuthorizerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "JwtAuthorizerLambdaVersionQlfFtaVnh5IkSvFnnYq6p7Yo9GPdrJSEiMvOL2tjLo"
+        "Ref": "JwtAuthorizerLambdaVersion8xfWUD8z1u7izk1yextPrfhE87tGVeYnD3uArxA"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-JwtAuthorizerLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-JwtAuthorizerLambdaFunctionQualifiedArn"
       }
     },
     "DbConnectionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DbConnectionLambdaVersionL8FVtXkUYF9KfmXuipADb6UOInzsPMRkV7b7xWaniKA"
+        "Ref": "DbConnectionLambdaVersionabUX55L62OUB366F2GVmRefMkoMP8QLklK57g8jBtpA"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-DbConnectionLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-DbConnectionLambdaFunctionQualifiedArn"
       }
     },
     "UserAuthLoginLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserAuthLoginLambdaVersionBbgNpAXoeK3jmMPsu0Wfo4rz5K9PtHfeo2Mcpv40"
+        "Ref": "UserAuthLoginLambdaVersionK5O2UIg24MMhhXTb9zzENaAGqHppAmtGvEEwqGJaY"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserAuthLoginLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserAuthLoginLambdaFunctionQualifiedArn"
       }
     },
     "UserGetAccessTokebByRefereshTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserGetAccessTokebByRefereshTokenLambdaVersion4lhmITIno1CjoNvjCjMA5kRqX3dWZOE009gErQ7uo"
+        "Ref": "UserGetAccessTokebByRefereshTokenLambdaVersionv1VBRykoSSFL4xGoqpPP5EyjWhxGXJPo09GnoOcrPmU"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserGetAccessTokebByRefereshTokenLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserGetAccessTokebByRefereshTokenLambdaFunctionQualifiedArn"
       }
     },
     "UserAccessHotelListDetailLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserAccessHotelListDetailLambdaVersionXRgDPVzDfbYRP3REtIT8riZ3juyYKuJvZO88Nd5Zd4"
+        "Ref": "UserAccessHotelListDetailLambdaVersion96A48A4zextBGShES89FbLMwRvcyjfqdMC13fYjbWYU"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserAccessHotelListDetailLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserAccessHotelListDetailLambdaFunctionQualifiedArn"
       }
     },
     "UserProfileGetUpdateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserProfileGetUpdateLambdaVersion4RupUaHv1443ITROoKEZtggS4h6Ul3Wj8vGfxAhZM60"
+        "Ref": "UserProfileGetUpdateLambdaVersionqAKXYuF1WNIExbQiyz7w0orLvO2Wm4xqYs47xrBdCvQ"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserProfileGetUpdateLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserProfileGetUpdateLambdaFunctionQualifiedArn"
       }
     },
     "UserListCreateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserListCreateLambdaVersionNNrAWlb1LZ0uRlfNnvvGnw1a3RFbqm0qemFJ6S3aAjY"
+        "Ref": "UserListCreateLambdaVersionFOf9WGCXnYH7IS0IkqHKJQSlwDRP0sLrJgbtSguWlTM"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserListCreateLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserListCreateLambdaFunctionQualifiedArn"
       }
     },
     "UserRetrieveUpdateDestroyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserRetrieveUpdateDestroyLambdaVersionpLLFDqtjhecfUU0iVqHOQHmgE0Mbcm63R9CU8Ev3ik"
+        "Ref": "UserRetrieveUpdateDestroyLambdaVersionqrVwdrPHgNh8OL6o3hc1Aiilf21MIPdrFnG20RCDw0"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-UserRetrieveUpdateDestroyLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-UserRetrieveUpdateDestroyLambdaFunctionQualifiedArn"
       }
     },
     "AuthAppContentTypeListCreateUpdateDestroyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthAppContentTypeListCreateUpdateDestroyLambdaVersionmMB9vnhFoPDEFRi5LPZHKTHxLFM9rW0cg61OqWZJGc"
+        "Ref": "AuthAppContentTypeListCreateUpdateDestroyLambdaVersionvUmFd878bOqBAhWv9Xjlq6MT8lLcq1Eq5kXuPg"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-AuthAppContentTypeListCreateUpdateDestroyLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-AuthAppContentTypeListCreateUpdateDestroyLambdaFunctionQualifiedArn"
       }
     },
     "AuthPermissionListCreateUpdateDestroyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthPermissionListCreateUpdateDestroyLambdaVersionYDOZA9NRDDcUbYUHMbz56S7dFP2V5QshywbCBvLo"
+        "Ref": "AuthPermissionListCreateUpdateDestroyLambdaVersionVNCFSGpPQwg4bBPxXwOdGEKP4GujVjqm6jyIXnoUTM"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-AuthPermissionListCreateUpdateDestroyLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-AuthPermissionListCreateUpdateDestroyLambdaFunctionQualifiedArn"
       }
     },
     "AuthGroupListCreateUpdateDestroyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthGroupListCreateUpdateDestroyLambdaVersionXnDlj3b1wBrOsfMLOmDmhZJiePtcLbl6k6vsGpuTQ0"
+        "Ref": "AuthGroupListCreateUpdateDestroyLambdaVersionf1p7djBdrJ1xVGXwmimhxYUdlmxptoWuUPom8Cjo45g"
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-AuthGroupListCreateUpdateDestroyLambdaFunctionQualifiedArn"
+        "Name": "sls-gxp-service-main-dev-AuthGroupListCreateUpdateDestroyLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -4227,7 +4217,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-test-kishan-dev-ServiceEndpoint"
+        "Name": "sls-gxp-service-main-dev-ServiceEndpoint"
       }
     }
   }
