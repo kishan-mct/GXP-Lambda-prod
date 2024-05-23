@@ -64,6 +64,9 @@
       "type": "string",
       "maxLength": 20
     },
+    "is_active": {
+      "type": "boolean"
+    },
     "profile_picture": {
       "type": "string"
     },
@@ -109,15 +112,20 @@
     },
     "password": {
       "type": "string",
-      "minLength": 8,
-      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$"
+      "minLength": 8
     },
     "created_by": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "maxLength": 255
     },
     "updated_by": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "maxLength": 255
     },
     "user_permission": {
@@ -147,6 +155,4 @@
   },
   "required": [
     "email"
-  ],
-  "additionalProperties": false
-}
+  ]}

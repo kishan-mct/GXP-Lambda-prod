@@ -94,8 +94,7 @@ def userListCreate(event, context):
             else:
                 # Check if the email already exists
                 email_exists_result = gxp_db.get_query("users_user", "*", condition="LOWER(email) = LOWER(%s)", params=(email,))
-
-                if email_exists_result.get("result", {}):
+                if email_exists_result.get("data", {}):
                     query_result["status"] = False
                     query_result["message"] = f"{email} user email already exists"
                 else:
@@ -146,9 +145,10 @@ def userListCreate(event, context):
                             ]
                             if user_grouppermission_data:
                                  gxp_db.bulk_insert_query("users_usergroups", user_grouppermission_data)
-                        query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
+                            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
                         
         else:
+            query_result["status"] = False
             query_result["message"] = f'Unsupported HTTP method: {http_method}'
             status_code = 405
 
@@ -310,3 +310,4 @@ def userProfileGetUpdate(event, context):
                 'Access-Control-Allow-Origin': '*'
             }
         }
+    

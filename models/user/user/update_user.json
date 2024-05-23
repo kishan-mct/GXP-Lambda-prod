@@ -153,5 +153,5 @@
   },
   "required": [
     "email"
-  ],"additionalProperties": false
+  ]
 }
