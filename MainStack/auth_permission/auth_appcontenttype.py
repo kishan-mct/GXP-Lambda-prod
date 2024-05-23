@@ -84,6 +84,7 @@ def authAppContentTypeListCreateUpdateDestroy(event, context):
             
             existing_record = gxp_db.get_query("auth_appcontenttype", ["app_label", "model"], condition="LOWER(app_label)=LOWER(%s) AND LOWER(model)=LOWER(%s) AND id!=%s", 
                                                params=(app_label, model, auth_appcontenttype_id)).get("data")
+            print("existing_record",existing_record)
             if existing_record:
                 query_result["message"] = f"app_label {app_label} in {model} model already exists."
             else:

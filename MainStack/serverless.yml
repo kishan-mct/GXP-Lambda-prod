@@ -1,4 +1,4 @@
-service: gxp-service-main
+service: test-kishan
 
 provider:
   name: aws
@@ -169,7 +169,6 @@ functions:
           request:
             schemas:
               application/json: ${file(../models/user/user/create_user.json)}
-          
 
   userRetrieveUpdateDestroy:
     handler: user.user.userRetrieveUpdateDestroy

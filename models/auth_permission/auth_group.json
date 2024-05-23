@@ -7,7 +7,7 @@
             "type": "string",
             "maxLength": 150
         },
-        "auth_grouppermission": {
+        "user_permission": {
             "type": "object",
             "properties": {
                 "add_permission": {

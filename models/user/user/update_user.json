@@ -1,114 +1,157 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "User",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "user_hotel": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User_update",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "user_hotel": {
+      "type": "string"
+    },
+    "hotel": {
+      "type": "array",
+      "items": {
         "type": "string"
-      },
-      "hotel": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "ip_address": {
-        "type": "string",
-        "format": "ipv4"
-      },
-      "last_visit_hotel": {
-        "type": "string"
-      },
-      "last_visit_light_box": {
-        "type": "array"
-      },
-      "last_visit_date": {
-        "type": "string",
-        "format": "date-time"
-      },
-      "user_type": {
-        "type": "string",
-        "maxLength": 20
-      },
-      "first_name": {
-        "type": "string",
-        "maxLength": 50
-      },
-      "last_name": {
-        "type": "string",
-        "maxLength": 50
-      },
-      "email": {
-        "type": "string",
-        "format": "email"
-      },
-      "is_email_verify": {
-        "type": "boolean"
-      },
-      "mobile": {
-        "type": "string",
-        "maxLength": 20
-      },
-      "mobile_iso": {
-        "type": "string",
-        "maxLength": 10
-      },
-      "is_mobile_verify": {
-        "type": "boolean"
-      },
-      "gender": {
-        "type": "string",
-        "maxLength": 20
-      },
-      "profile_picture": {
-        "type": "string"
-      },
-      "device_data": {
-        "type": "object"
-      },
-      "fingerprint_js_data": {
-        "type": "object"
-      },
-      "date_of_birth": {
-        "type": "string",
-        "maxLength": 250
-      },
-      "address_line_first": {
-        "type": "string",
-        "maxLength": 250
-      },
-      "address_line_second": {
-        "type": "string",
-        "maxLength": 250
-      },
-      "zip_code": {
-        "type": "string",
-        "maxLength": 20
-      },
-      "city": {
-        "type": "string",
-        "maxLength": 50
-      },
-      "state": {
-        "type": "string",
-        "maxLength": 50
-      },
-      "country": {
-        "type": "string",
-        "maxLength": 50
-      },
-      "special_notes": {
-        "type": "string"
-      },
-      "message_app_setting": {
-        "type": "object"
       }
     },
-    "required": ["email"],  "additionalProperties":false
-  
-  }
-  
+    "ip_address": {
+      "type": "string",
+      "format": "ipv4"
+    },
+    "last_visit_hotel": {
+      "type": "string"
+    },
+    "last_visit_light_box": {
+      "type": "array"
+    },
+    "last_visit_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "user_type": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "first_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "last_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "is_email_verify": {
+      "type": "boolean"
+    },
+    "mobile": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "mobile_iso": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "is_mobile_verify": {
+      "type": "boolean"
+    },
+    "gender": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "profile_picture": {
+      "type": "string"
+    },
+    "device_data": {
+      "type": "object"
+    },
+    "fingerprint_js_data": {
+      "type": "object"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "address_line_first": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "address_line_second": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "zip_code": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "special_notes": {
+      "type": "string"
+    },
+    "message_app_setting": {
+      "type": "object"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$"
+    },
+    "user_permission": {
+      "type": "object",
+      "properties": {
+        "add_permission": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "user_grouppermission": {
+          "type": "object",
+          "properties": {
+            "add_grouppermission": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        },
+        "remove_permission": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "remove_group_permission": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "email"
+  ],"additionalProperties": false
+}

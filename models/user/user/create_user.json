@@ -106,8 +106,47 @@
     },
     "message_app_setting": {
       "type": "object"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$"
+    },
+    "created_by": {
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "updated_by": {
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "user_permission": {
+      "type": "object",
+      "properties": {
+        "add_permission": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "user_grouppermission": {
+          "type": "object",
+          "properties": {
+            "add_grouppermission": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      }
     }
   },
-  "required": ["email"],  "additionalProperties":false
-
+  "required": [
+    "email"
+  ],
+  "additionalProperties": false
 }
