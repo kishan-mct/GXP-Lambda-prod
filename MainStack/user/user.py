@@ -115,32 +115,7 @@ def userListCreate(event, context):
                         else:
                             # Continue with user creation
                             query_result = gxp_db.insert_query("users_user", request_body)
-                            if query_result["status"]:
-                            
-                                if add_permission:
-                                    user_permission_data = [
-                                        {
-                                            "id": str(uuid.uuid4()),
-                                            "user_id": request_body["id"],
-                                            "permission_id": permission_ids
-                                        }
-                                        for permission_ids in add_permission
-                                    ]
-                                    if user_permission_data:
-                                        gxp_db.bulk_insert_query("users_userpermissions", user_permission_data)
-
-                                if add_grouppermission:
-                                    user_grouppermission_data = [
-                                    {
-                                        "id": str(uuid.uuid4()),
-                                        "user_id": request_body["id"],
-                                        "group_id": grouppermission_id
-                                    }
-                                    for grouppermission_id in add_grouppermission
-                                ]
-                                if user_grouppermission_data:
-                                    gxp_db.bulk_insert_query("users_usergroups", user_grouppermission_data)
-                                query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
+                            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
 
                     else:
                         # Continue with user creation since mobile number is not provided
@@ -216,8 +191,10 @@ def userRetrieveUpdateDestroy(event, context):
                     query_result["status"] = False
                     query_result["message"] = f"{email} user email already exists"
                     proceed_with_execution = False
-                        
-            if proceed_with_execution:
+                print("proceed_with_execution",proceed_with_execution)
+            
+            else :
+             if proceed_with_execution:
                 # Continue with user creation
                 add_permission = user_permission.pop('add_permission', [])
                 add_group_permission = user_grouppermission.pop('add_grouppermission',[])
@@ -255,7 +232,6 @@ def userRetrieveUpdateDestroy(event, context):
 
                 if query_result['status']:
                     query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(user_id,))
-
 
         elif http_method == 'DELETE':
             gxp_db.delete_query("users_usergroups", condition="user_id=%s", params=(user_id,))
