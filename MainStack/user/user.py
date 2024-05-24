@@ -187,11 +187,10 @@ def userRetrieveUpdateDestroy(event, context):
                 # Check if the email already exists
             if email:
                 email_exists_result = gxp_db.get_query("users_user", "*", condition="LOWER(email) = LOWER(%s) AND id!=%s", params=(email, user_id))
-                if email_exists_result.get("result", {}):
+                if email_exists_result.get("data", {}):
                     query_result["status"] = False
                     query_result["message"] = f"{email} user email already exists"
                     proceed_with_execution = False
-                print("proceed_with_execution",proceed_with_execution)
             
             if proceed_with_execution:
                 # Continue with user creation
@@ -254,9 +253,7 @@ def userRetrieveUpdateDestroy(event, context):
                 'Access-Control-Allow-Origin': '*'
             }
         }
-
-
-
+    
 def userProfileGetUpdate(event, context):
     status_code = 200
     query_result = {"status": False, "message": ""}
