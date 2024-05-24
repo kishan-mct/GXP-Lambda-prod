@@ -193,8 +193,7 @@ def userRetrieveUpdateDestroy(event, context):
                     proceed_with_execution = False
                 print("proceed_with_execution",proceed_with_execution)
             
-            else :
-             if proceed_with_execution:
+            if proceed_with_execution:
                 # Continue with user creation
                 add_permission = user_permission.pop('add_permission', [])
                 add_group_permission = user_grouppermission.pop('add_grouppermission',[])
