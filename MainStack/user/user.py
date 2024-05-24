@@ -175,8 +175,8 @@ def userRetrieveUpdateDestroy(event, context):
     try:
         user_id = event['pathParameters']['id']
         if http_method == 'GET':
-            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(user_id,))
-          
+            query_result  = gxp_db.get_query("users_user", "*", condition="id=%s", params=(user_id,))
+        
         elif http_method == 'PATCH':
             proceed_with_execution = True
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
@@ -184,14 +184,14 @@ def userRetrieveUpdateDestroy(event, context):
             user_permission = request_body.pop('user_permission', {})
             user_grouppermission = request_body.pop('user_grouppermission', {})
             
-            # Check if the email already exists
+                # Check if the email already exists
             if email:
                 email_exists_result = gxp_db.get_query("users_user", "*", condition="LOWER(email) = LOWER(%s) AND id!=%s", params=(email, user_id))
                 if email_exists_result.get("result", {}):
                     query_result["status"] = False
                     query_result["message"] = f"{email} user email already exists"
                     proceed_with_execution = False
-                     
+                        
             if proceed_with_execution:
                 # Continue with user creation
                 add_permission = user_permission.pop('add_permission', [])
@@ -311,3 +311,61 @@ def userProfileGetUpdate(event, context):
             }
         }
     
+def userRetrievepermission(event, context):
+    status_code = 200
+    query_result = {"status": False, "message": ""}
+    http_method = event['httpMethod']
+    user_data = json.loads(event['requestContext']['authorizer']['user_data'])
+
+    try:
+        user_id = event['pathParameters']['id']
+        if http_method == 'GET':
+            user_exists_result = gxp_db.get_query("users_user", ["id"], condition="id=%s", params=(user_id,))
+            
+            if not user_exists_result.get("data"):
+                query_result["message"] = f"User not found"
+            
+            else:
+                user_data = gxp_db.get_query("users_user", ['*'], condition="id=%s", params=(user_id,))
+                
+                permissions_query_result = gxp_db.select_query(
+                    "users_userpermissions up JOIN auth_permission ap ON up.permission_id = ap.id",
+                    ["ap.*"],
+                    condition="up.user_id=%s",
+                    params=(user_id,)
+                )
+                permissions_data = permissions_query_result.get("data", [])
+                permissions = [perm["id"] for perm in permissions_data]
+
+                # Fetch user group permissions
+                permission_group_results = gxp_db.select_query(
+                    "users_usergroups up JOIN auth_group agp ON up.group_id = agp.id",
+                    ["agp.*"],
+                    condition="up.user_id=%s",
+                    params=(user_id,)
+                )
+                group_permissions_data = permission_group_results.get("data", [])
+                group_permissions = [perm["id"] for perm in group_permissions_data]
+
+                query_result = {
+                    "status":True,
+                    "id": user_id,
+                    "permissions": permissions,
+                    "group_permissions": group_permissions
+                }
+        else:
+            query_result["message"] = f'Unsupported HTTP method: {http_method}'
+            status_code = 405
+
+    except Exception as e:
+        query_result['status'] = False
+        query_result['message'] = repr(e)
+    finally:
+        return {
+            'statusCode': status_code,
+            'body': json.dumps(query_result, default=json_serializer),
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        }

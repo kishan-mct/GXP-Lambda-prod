@@ -192,7 +192,14 @@ functions:
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
 
-  
+  userRetrievepermission:
+    handler: user.user.userRetrievepermission
+    events:
+      - http:
+          path: user/user-permission/{id}
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
 
    ## app-content-type ##
   
