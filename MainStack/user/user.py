@@ -115,7 +115,32 @@ def userListCreate(event, context):
                         else:
                             # Continue with user creation
                             query_result = gxp_db.insert_query("users_user", request_body)
-                            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
+                            if query_result["status"]:
+                            
+                                if add_permission:
+                                    user_permission_data = [
+                                        {
+                                            "id": str(uuid.uuid4()),
+                                            "user_id": request_body["id"],
+                                            "permission_id": permission_ids
+                                        }
+                                        for permission_ids in add_permission
+                                    ]
+                                    if user_permission_data:
+                                        gxp_db.bulk_insert_query("users_userpermissions", user_permission_data)
+
+                                if add_grouppermission:
+                                    user_grouppermission_data = [
+                                    {
+                                        "id": str(uuid.uuid4()),
+                                        "user_id": request_body["id"],
+                                        "group_id": grouppermission_id
+                                    }
+                                    for grouppermission_id in add_grouppermission
+                                ]
+                                if user_grouppermission_data:
+                                    gxp_db.bulk_insert_query("users_usergroups", user_grouppermission_data)
+                                query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
 
                     else:
                         # Continue with user creation since mobile number is not provided

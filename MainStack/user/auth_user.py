@@ -87,7 +87,7 @@ def userAuthLogin(event, context):
             request_body = decrypt_data(request_body_data.get('data'))
 
             email = request_body.get("email", None)
-            mobile_number = request_body.get("mobile_number", None)
+            mobile_number = request_body.get("mobile", None)
             password = request_body.get("password", None)
             otp_number = request_body.get("otp_number", None)
             auth_verification_otp_id = request_body.get("auth_verification_otp_id", None)
