@@ -107,11 +107,6 @@
     "message_app_setting": {
       "type": "object"
     },
-    "password": {
-      "type": "string",
-      "minLength": 8,
-      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$"
-    },
     "user_permission": {
       "type": "object",
       "properties": {
@@ -122,19 +117,19 @@
             "format": "uuid"
           }
         },
-        "user_grouppermission": {
-          "type": "object",
-          "properties": {
-            "add_grouppermission": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          }
-        },
         "remove_permission": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "user_grouppermission": {
+      "type": "object",
+      "properties": {
+        "add_grouppermission": {
           "type": "array",
           "items": {
             "type": "string",
@@ -151,7 +146,5 @@
       }
     }
   },
-  "required": [
-    "email"
-  ]
+  "additionalProperties": false
 }
