@@ -33,7 +33,7 @@ def authPermissionListCreateUpdateDestroy(event, context):
             condition = "1=1"
             if 'ap.id' in multi_value_qp:
                 id = multi_value_qp.pop('ap.id')[0]
-                condition += f" AND ap.id={id}"
+                condition += f" AND ap.id='{id}'"
                 if hotel_id:
                     condition += " AND ap.is_super=False"
                 

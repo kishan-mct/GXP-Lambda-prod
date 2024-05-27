@@ -89,7 +89,9 @@ def userListCreate(event, context):
             user_permission = request_body.pop('user_permission', {})
             user_grouppermission = request_body.pop('user_grouppermission', {})
             
-            if not email or not user_type or not password or not first_name or not last_name:
+            # Check for required fields
+            required_fields = [email, user_type, password, first_name, last_name]
+            if None in required_fields:
                 query_result["message"] = "Required field is empty"
             else:
                 # Check if the email already exists
@@ -105,48 +107,46 @@ def userListCreate(event, context):
                     request_body["id"] = str(uuid.uuid4())
                     request_body["created_by"] = user_data["email"]
 
-                    # Only check mobile number if provided
+                    # Check mobile number if provided
                     if mobile_number:
-                        # Check if the mobile number already exists
                         mobile_exists_result = gxp_db.get_query("users_user", "*", condition="mobile_number = %s", params=(mobile_number,))
                         if mobile_exists_result.get("result", {}):
                             query_result["status"] = False
                             query_result["message"] = f"{mobile_number} user mobile number already exists"
                         else:
-                            # Continue with user creation
                             query_result = gxp_db.insert_query("users_user", request_body)
-                            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
-
                     else:
                         # Continue with user creation since mobile number is not provided
                         query_result = gxp_db.insert_query("users_user", request_body)
-                        if query_result["status"]:
-                            
-                            if add_permission:
-                                user_permission_data = [
-                                    {
-                                        "id": str(uuid.uuid4()),
-                                        "user_id": request_body["id"],
-                                        "permission_id": permission_ids
-                                    }
-                                    for permission_ids in add_permission
-                                ]
-                                if user_permission_data:
-                                    gxp_db.bulk_insert_query("users_userpermissions", user_permission_data)
+                    
+                    # Bulk insert user permissions if provided
+                    if add_permission:
+                        user_permission_data = [
+                            {
+                                "id": str(uuid.uuid4()),
+                                "user_id": request_body["id"],
+                                "permission_id": permission_ids
+                            }
+                            for permission_ids in add_permission
+                        ]
+                        if user_permission_data:
+                            gxp_db.bulk_insert_query("users_userpermissions", user_permission_data)
 
-                            if add_grouppermission:
-                                user_grouppermission_data = [
-                                {
-                                    "id": str(uuid.uuid4()),
-                                    "user_id": request_body["id"],
-                                    "group_id": grouppermission_id
-                                }
-                                for grouppermission_id in add_grouppermission
-                            ]
-                            if user_grouppermission_data:
-                                 gxp_db.bulk_insert_query("users_usergroups", user_grouppermission_data)
-                            query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
-                        
+                    # Bulk insert user group permissions if provided
+                    if add_grouppermission:
+                        user_grouppermission_data = [
+                            {
+                                "id": str(uuid.uuid4()),
+                                "user_id": request_body["id"],
+                                "group_id": grouppermission_id
+                            }
+                            for grouppermission_id in add_grouppermission
+                        ]
+                        if user_grouppermission_data:
+                            gxp_db.bulk_insert_query("users_usergroups", user_grouppermission_data)
+
+                    # Retrieve the newly created user details
+                    query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(request_body["id"],))
         else:
             query_result["status"] = False
             query_result["message"] = f'Unsupported HTTP method: {http_method}'

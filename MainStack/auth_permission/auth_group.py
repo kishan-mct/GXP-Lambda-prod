@@ -41,7 +41,7 @@ def authGroupListCreateUpdateDestroy(event, context):
                 query_result = gxp_db.get_query(table, columns, condition=condition, params=params)
                 
             else:
-                condition = "hotel_id IS NULL"
+                condition = "hotel_id IS NOT NULL" # add not Null #
                 params = ()
                 if hotel_id:
                     condition = f"hotel_id='{hotel_id}'"
