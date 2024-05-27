@@ -90,8 +90,7 @@ def userListCreate(event, context):
             user_grouppermission = request_body.pop('user_grouppermission', {})
             
             # Check for required fields
-            required_fields = [email, user_type, password, first_name, last_name]
-            if None in required_fields:
+            if not email or not user_type or not password or not first_name or not last_name:
                 query_result["message"] = "Required field is empty"
             else:
                 # Check if the email already exists
@@ -178,14 +177,14 @@ def userRetrieveUpdateDestroy(event, context):
             query_result  = gxp_db.get_query("users_user", "*", condition="id=%s", params=(user_id,))
         
         elif http_method == 'PATCH':
-            proceed_with_execution = True
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
             email = request_body.get('email', None)
             user_permission = request_body.pop('user_permission', {})
             user_grouppermission = request_body.pop('user_grouppermission', {})
+            proceed_with_execution = True
             
-                # Check if the email already exists
             if email:
+                # Check if the email already exists
                 email_exists_result = gxp_db.get_query("users_user", "*", condition="LOWER(email) = LOWER(%s) AND id!=%s", params=(email, user_id))
                 if email_exists_result.get("data", {}):
                     query_result["status"] = False
@@ -193,41 +192,47 @@ def userRetrieveUpdateDestroy(event, context):
                     proceed_with_execution = False
             
             if proceed_with_execution:
-                # Continue with user creation
+                # Continue with user update
                 add_permission = user_permission.pop('add_permission', [])
-                add_group_permission = user_grouppermission.pop('add_grouppermission',[])
-
+                remove_permission = user_permission.pop('remove_permission', [])
+                add_group_permission = user_grouppermission.pop('add_grouppermission', [])
+                remove_group_permission = user_grouppermission.pop('remove_group_permission', [])
+                
+                # Bulk insert user permissions if provided
                 if add_permission:
                     auth_permission_data = [
                         {
-                            "id": str(uuid.uuid4()), 
-                            "user_id": user_id, 
+                            "id": str(uuid.uuid4()),
+                            "user_id": user_id,
                             "permission_id": permission_id
                         } 
                         for permission_id in add_permission
-                    ]
+                        ]
                     gxp_db.bulk_insert_query("users_userpermissions", auth_permission_data)
-                remove_permission = user_permission.pop('remove_permission', [])
+                
+                # Remove user permissions if provided
                 if remove_permission:
                     gxp_db.delete_query("users_userpermissions", condition="user_id=%s AND permission_id IN %s", params=(user_id, remove_permission))
-                        
-                if add_group_permission :
-                    auth__group_permission_data = [
-                        {
-                            "id": str(uuid.uuid4()), 
-                            "user_id": user_id, 
-                            "group_id": group_id
-                        } 
-                        for group_id in add_group_permission
-                    ]
-                    gxp_db.bulk_insert_query("users_usergroups", auth__group_permission_data)
                 
-                remove_group_permission = user_grouppermission.pop('remove_group_permission', [])
-                if remove_group_permission :
+                # Bulk insert user group permissions if provided
+                if add_group_permission:
+                    auth_group_permission_data = [
+                        {
+                          "id": str(uuid.uuid4()),
+                          "user_id": user_id, 
+                          "group_id": group_id
+                        }
+                        for group_id in add_group_permission
+                        ]
+                    gxp_db.bulk_insert_query("users_usergroups", auth_group_permission_data)
+                
+                # Remove user group permissions if provided
+                if remove_group_permission:
                     gxp_db.delete_query("users_usergroups", condition="user_id=%s AND group_id IN %s", params=(user_id, remove_group_permission))
                 
+                # Update user details
                 query_result = gxp_db.update_query("users_user", request_body, condition="id=%s", params=(user_id,))
-
+                
                 if query_result['status']:
                     query_result = gxp_db.get_query("users_user", "*", condition="id=%s", params=(user_id,))
 
