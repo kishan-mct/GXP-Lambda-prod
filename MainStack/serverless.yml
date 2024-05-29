@@ -196,7 +196,7 @@ functions:
     handler: user.user.userRetrievepermission
     events:
       - http:
-          path: user/user-permission/{id}
+          path: user/user-permission
           method: get
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
@@ -301,4 +301,250 @@ functions:
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
 
+  ## hotel ##
+  # hotel 
+  hotelListCreate:
+    handler: hotel.hotel.hotelListCreate
+    events:
+      - http:
+          path: hotel/hotel
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: hotel/hotel
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/hotel/hotel.json)}
+    
+  hotelUpdateDestroy:
+    handler: hotel.hotel.hotelUpdateDestroy
+    events:
+      - http:
+          path: hotel/hotel/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/hotel/hotel.json)}
+      - http:
+          path: hotel/hotel/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
 
+  # hotel brand
+  hotelBrandListCreate:
+    handler: hotel.hotel_brand.hotelBrandListCreate
+    events:
+      - http:
+          path: hotel/hotel-brand
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: hotel/hotel-brand
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/brand.json)}
+
+  hotelBrandUpdateDestroy:
+    handler: hotel.hotel_brand.hotelBrandUpdateDestroy
+    events:
+      - http:
+          path: hotel/hotel-brand/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/brand.json)}
+      - http:
+          path: hotel/hotel-brand/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+  ## room ##
+  
+  # room building
+  buildingListCreate:
+    handler: room.building.buildingListCreate
+    events:
+      - http:
+          path: room/room-building
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: room/room-building
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/building.json)}
+
+  buildingUpdateDestroy:
+    handler: room.building.buildingUpdateDestroy
+    events:
+      - http:
+          path: room/room-building/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/building.json)}
+      - http:
+          path: room/room-building/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  # room floor
+  floorListCreate:
+    handler: room.floor.floorListCreate
+    events:
+      - http:
+          path: room/room-floor
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: room/room-floor
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/floor.json)}
+
+  floorUpdateDestroy:
+    handler: room.floor.floorUpdateDestroy
+    events:
+      - http:
+          path: room/room-floor/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/floor.json)}
+      - http:
+          path: room/room-floor/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  # room type
+  roomTypeListCreate:
+    handler: room.room_type.roomTypeListCreate
+    events:
+      - http:
+          path: room/room-type
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: room/room-type
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/room_type.json)}
+
+  roomTypeUpdateDestroy:
+    handler: room.room_type.roomTypeUpdateDestroy
+    events:
+      - http:
+          path: room/room-type/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/room_type.json)}
+      - http:
+          path: room/room-type/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+  # room
+  roomListCreate:
+    handler: room.room.roomListCreate
+    events:
+      - http:
+          path: room/room
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: room/room
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/room.json)}
+
+  roomUpdateDestroy:
+    handler: room.room.roomUpdateDestroy
+    events:
+      - http:
+          path: room/room/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/room.json)}
+      - http:
+          path: room/room/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+  # rate plan
+  ratePlanListCreate:
+    handler: room.rate_plan.ratePlanListCreate
+    events:
+      - http:
+          path: room/rate-plan
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: room/rate-plan
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/rate_plan.json)}
+
+  ratePlanUpdateDestroy:
+    handler: room.rate_plan.ratePlanUpdateDestroy
+    events:
+      - http:
+          path: room/rate-plan/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          # request:
+          #   schemas:
+          #     application/json: ${file(../models/room/rate_plan.json)}
+      - http:
+          path: room/rate-plan/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}

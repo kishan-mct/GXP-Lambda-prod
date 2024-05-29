@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Brand",
+  "title": "Hotel Brand",
   "type": "object",
   "properties": {
     "id": {
@@ -24,47 +24,47 @@
       "type": "string",
       "maxLength": 20
     },
-    "favicon_icon_image": {
+    "favicon_icon": {
       "type": "string",
-      "maxLength": 250,
-      "format": "uri"
+      "format": "uri",
+      "maxLength": 250
     },
-    "logo_file": {
+    "logo": {
       "type": "string",
-      "maxLength": 250,
-      "format": "uri"
+      "format": "uri",
+      "maxLength": 250
     },
     "membership_reward_image": {
       "type": "string",
-      "maxLength": 500,
-      "format": "uri"
+      "format": "uri",
+      "maxLength": 500
     },
     "membership_reward_tnc": {
       "type": "string"
     },
     "rewards_website_url": {
       "type": "string",
-      "maxLength": 1000,
-      "format": "uri"
+      "format": "uri",
+      "maxLength": 1000
     },
     "rewards_website_join_url": {
       "type": "string",
-      "maxLength": 1000,
-      "format": "uri"
+      "format": "uri",
+      "maxLength": 1000
     },
     "is_active": {
-      "type": "boolean",
-      "default": true
+      "type": "boolean"
     },
     "is_support_membership_rewards": {
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     }
   },
   "required": [
     "name",
     "email",
-    "mobile"
+    "mobile",
+    "is_active",
+    "is_support_membership_rewards"
   ],
-  "additionalProperties":false
+  "additionalProperties": false
 }

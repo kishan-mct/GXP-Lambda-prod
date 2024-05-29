@@ -320,9 +320,11 @@ def userRetrievepermission(event, context):
     user_data = json.loads(event['requestContext']['authorizer']['user_data'])
 
     try:
-        user_id = event['pathParameters']['id']
+        # user_id = event['pathParameters']['id']
+        user_id = user_data['user_id']
+        
         if http_method == 'GET':
-            user_exists_result = gxp_db.get_query("users_user", ["id"], condition="id=%s", params=(user_id,))
+            user_exists_result = gxp_db.get_query("users_user", ["*"], condition="id=%s", params=(user_id,))
             
             if not user_exists_result.get("data"):
                 query_result["message"] = f"User not found"
@@ -330,6 +332,7 @@ def userRetrievepermission(event, context):
             else:
                 user_data = gxp_db.get_query("users_user", ['*'], condition="id=%s", params=(user_id,))
                 
+                # Fetch user permissions
                 permissions_query_result = gxp_db.select_query(
                     "users_userpermissions up JOIN auth_permission ap ON up.permission_id = ap.id",
                     ["ap.*"],
@@ -337,24 +340,27 @@ def userRetrievepermission(event, context):
                     params=(user_id,)
                 )
                 permissions_data = permissions_query_result.get("data", [])
-                permissions = [perm["id"] for perm in permissions_data]
+                # permissions = [perm["id"] for perm in permissions_data]
 
                 # Fetch user group permissions
                 permission_group_results = gxp_db.select_query(
-                    "users_usergroups up JOIN auth_group agp ON up.group_id = agp.id",
-                    ["agp.*"],
-                    condition="up.user_id=%s",
+                    "users_usergroups uug JOIN auth_grouppermission agp ON uug.group_id = agp.group_id "
+                    "JOIN auth_permission ap ON agp.permission_id = ap.id",
+                    ["ap.id", "ap.name", "ap.app_content_type_id", "ap.codename", "ap.is_super"],
+                    condition="uug.user_id=%s",
                     params=(user_id,)
                 )
                 group_permissions_data = permission_group_results.get("data", [])
-                group_permissions = [perm["id"] for perm in group_permissions_data]
+                # group_permissions = [perm["id"] for perm in group_permissions_data]
+                
+                all_permissions_data = permissions_data + group_permissions_data
+                unique_permissions = {perm["id"]: perm for perm in all_permissions_data}.values()
 
                 query_result = {
-                    "status":True,
-                    "id": user_id,
-                    "permissions": permissions,
-                    "group_permissions": group_permissions
+                    "user_details": user_data,
+                    "permissions": list(unique_permissions),
                 }
+
         else:
             query_result["message"] = f'Unsupported HTTP method: {http_method}'
             status_code = 405
