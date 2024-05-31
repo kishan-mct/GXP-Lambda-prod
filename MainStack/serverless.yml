@@ -29,6 +29,7 @@ package:
     - ../utils/**
     - ../common/**
     - ../templates/**
+    - ../.env
 
 custom:
   corsConfig:
@@ -72,6 +73,10 @@ functions:
   # Database Connection
   dbConnection:
     handler: common.db_conenction.dbConnection
+    timeout: 20
+  
+  generate_presigned_url:
+    handler: utils.generate_presigned_url.generate_presigned_url
     timeout: 20
 
   # Users auth login

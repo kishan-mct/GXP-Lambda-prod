@@ -5,6 +5,7 @@ import sys
 from utils.db_operations import DBOperations
 from utils.common_functions import json_serializer, convert_empty_strings_to_none
 from utils.authentication import IsSuperAdmin
+from utils.generate_presigned_url import generate_presigned_url,remove_query_params
 
 gxp_db = DBOperations("gxp-dev")
 
@@ -31,22 +32,42 @@ def floorListCreate(event, context):
                             page_size=page_size,
                             page_number=page_number,
                         )
-
+                if query_result.get('data'):
+                    for result in query_result['data']:
+                        images = json.dumps(result.get('images', '[]'))
+                        presigned_urls = []
+                        if images:
+                            for image_url in images.strip('[]').strip('"').split('","'):  
+                                object_name = '/'.join(image_url.split('/')[-5:]) # image_url.split('/')[-1]
+                                print(object_name)
+                                presigned_url = generate_presigned_url('backopsmedia', object_name, expiration=120,operation='get_object',)
+                                presigned_urls.append(presigned_url)
+                        result['images'] = presigned_urls
+                            
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
-            building_id=request_body.get("building_id")
-            
+            building_id = request_body.get("building_id")
+            images = request_body.get('images', [])
+
             building_exists_result = gxp_db.get_query("room_building", ["*"], condition="id=%s", params=(building_id,))
-            if  not building_exists_result.get("data"):
-                    query_result["message"] = f"building not found"
+            if not building_exists_result.get("data"):
+                query_result["message"] = "building not found"
             else:
                 request_body["id"] = str(uuid.uuid4())
                 request_body["hotel_id"] = user_data["hotel_id"]
                 request_body["created_by"] = user_data["email"]
                 
+                s3_bucket = 'backopsmedia'
+                object_name = f'test-kishan/room_floor/{user_data["hotel_id"]}/images/{images[0]}'
+                content_type = 'image/png'
+                presigned_url = generate_presigned_url(s3_bucket, object_name, content_type, operation ='put_object')
+                request_body["images"] = json.dumps(remove_query_params(presigned_url))
+
                 query_result = gxp_db.insert_query("room_floor", request_body)
                 if query_result['status']:
                     query_result = gxp_db.get_query("room_floor", "*", condition="id=%s", params=(request_body["id"],))
+                if presigned_url:
+                    query_result["presigned_url"] = presigned_url
         else:
             status_code = 405
             query_result["message"] = f'Unsupported HTTP method: {http_method}'
