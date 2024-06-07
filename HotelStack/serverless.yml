@@ -1,0 +1,144 @@
+service: dev-gxp-service-hotel
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  main_service_name: dev-gxp-service
+
+  corsConfig:
+    origin: '*'
+    headers:
+      - Content-Type
+      - X-Api-Key
+      - authorization
+
+  authorizerConfig:
+    name: JwtAuthorizer2
+    resultTtlInSeconds: 0
+    identitySource: method.request.header.Authorization
+  
+  jwtEnvironment:
+    JWT_SECRET: gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-
+
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+  region: us-east-1
+  layers:
+    - arn:aws:lambda:us-east-1:813259119770:layer:GXP-Lambda:1
+
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.main_service_name}-${self:custom.stage}-ApiGatewayRestApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.main_service_name}-${self:custom.stage}-ApiGatewayRestApiRootResourceId
+
+  environment:
+    MY_API_KEY: ${self:custom.main_service_name}_apikey_${self:custom.stage}
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:*
+            - lambda:*
+          Resource: "*"
+
+package:
+  include:
+    - ../utils/**
+    - ../common/**
+    - ../templates/**
+
+functions:
+  # JWT Authentication
+  JwtAuthorizer2:
+    handler: common.jwt_auth.JwtAuthorizer
+    timeout: 10
+    environment: ${self:custom.jwtEnvironment}
+
+  hotelListCreateUpdateDestroy:
+    handler: hotel.hotel.hotelListCreateUpdateDestroy
+    events:
+      - http:
+          path: hotel/hotel
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: hotel/hotel
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  # room rate-plan
+  roomTypeListCreate:
+    handler: hotel.room_type.roomTypeListCreate
+    events:
+      - http:
+          path: room/room-type
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          
+               
+      
+      - http:
+          path: room/room-type
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  roomTypeUpdateDestroy:
+    handler: hotel.room_type.roomTypeUpdateDestroy
+    events:
+      - http:
+          path: room/room-type/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+      - http:
+          path: room/room-type/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  # hotel - brand
+  hotelBrandlist:
+    handler: hotel.hotel_brand.hotelBrandlist
+    events:
+      - http:
+          path: hotel/hotel-brand
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  hotelBrandCreateUpdateDestroy:
+    handler: hotel.hotel_brand.hotelBrandCreateUpdateDestroy
+    events:
+      - http:
+          path: hotel/hotel-brand
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/create_brand.json)}
+      - http:
+          path: hotel/hotel-brand/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/update_brand.json)}
+      - http:
+          path: hotel/hotel-brand/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      
+          

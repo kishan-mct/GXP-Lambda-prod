@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AppPermissionCreate",
+    "type": "object",
+    "properties": {
+        "app_module_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "codename": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "is_delete": {
+            "type": "boolean"
+        },
+        "is_super": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "app_module_id",
+        "name",
+        "codename",
+        "is_delete",
+        "is_super"
+    ],
+    "additionalProperties": false
+}

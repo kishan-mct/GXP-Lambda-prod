@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppModuleCreate",
+  "type": "object",
+  "properties": {
+    "app": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "module": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "is_delete": {
+      "type": "boolean"
+    },
+    "is_super": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "app",
+    "module",
+    "is_delete",
+    "is_super"
+  ],
+  "additionalProperties": false
+}
