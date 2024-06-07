@@ -1,0 +1,202 @@
+service: dev-gxp-service-user
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  main_service_name: dev-gxp-service
+
+  corsConfig:
+    origin: '*'
+    headers:
+      - Content-Type
+      - X-Api-Key
+      - authorization
+
+  authorizerConfig:
+    name: JwtAuthorizer1
+    resultTtlInSeconds: 0
+    identitySource: method.request.header.Authorization
+  
+  jwtEnvironment:
+    JWT_SECRET: gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-
+
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+  region: us-east-1
+  layers:
+    - arn:aws:lambda:us-east-1:813259119770:layer:GXP-Lambda:1
+
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.main_service_name}-${self:custom.stage}-ApiGatewayRestApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.main_service_name}-${self:custom.stage}-ApiGatewayRestApiRootResourceId
+
+  environment:
+    MY_API_KEY: ${self:custom.main_service_name}_apikey_${self:custom.stage}
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:*
+            - lambda:*
+          Resource: "*"
+
+package:
+  include:
+    - ../utils/**
+    - ../common/**
+    - ../templates/**
+
+functions:
+  # JWT Authentication
+  JwtAuthorizer1:
+    handler: common.jwt_auth.JwtAuthorizer
+    timeout: 10
+    environment: ${self:custom.jwtEnvironment}
+
+  # Users auth login
+  userAuthLogin:
+    handler: user_auth.user_auth.userAuthLogin
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: auth/login
+          method: post
+          request:
+            schemas:
+              application/json: ${file(../models/user/user_auth/login.json)}
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Api-Key
+      - http:
+          path: auth/login
+          method: patch
+          request:
+            schemas:
+              application/json: ${file(../models/user/user_auth/login.json)}
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Api-Key
+
+  # Users get new access token by his referesh token
+  userGetAccessTokebByRefereshToken:
+    handler: user_auth.user_auth.userGetAccessTokebByRefereshToken
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: auth/access-token
+          method: post
+          cors: ${self:custom.corsConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/user_auth/get_access_token.json)}
+
+  # User access all hotel list & detail
+  userAccessHotelListDetail:
+    handler: user_auth.user_auth.userAccessHotelListDetail
+    environment: ${self:custom.jwtEnvironment}
+    events:
+      - http:
+          path: auth/hotel
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: auth/hotel/{hotel_id}
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
+
+  # User profile get & update
+  userProfileGetUpdate:
+    handler: user_auth.user_profile.userProfileGetUpdate
+    events:
+      - http:
+          path: auth/profile
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: auth/profile
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/user_profile/update.json)}
+
+
+  # GXP users APIS
+  gxpUserListCreateUpdateDestroy:
+    handler: user.gxp_user.gxpUserListCreateUpdateDestroy
+    events:
+      - http:
+          path: user/gxp-user
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/gxp-user    
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/gxp_user/create_user.json)}
+      - http:
+          path: user/gxp-user/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/gxp_user/update_user.json)}
+      - http:
+          path: user/gxp-user/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+
+  # Hotel users APIS
+  hotelUserListCreateUpdateDestroy:
+    handler: user.hotel_user.hotelUserListCreateUpdateDestroy
+    events:
+      - http:
+          path: user/hotel-user
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: user/hotel-user    
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/hotel_user/create_user.json)}
+      - http:
+          path: user/hotel-user/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/user/hotel_user/update_user.json)}
+      - http:
+          path: user/hotel-user/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+  

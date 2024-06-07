@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "S3MediaFileUpload",
+    "type": "object",
+    "properties": {
+      "media_type": {
+        "type": "string",
+        "maxLength": 30,
+        "enum": [
+          "user_profile",
+          "brand_logo",
+          "brand_favicon",
+          "hotel_logo",
+          "hotel_favicon",
+          "hotel_info",
+          "building",
+          "floor",
+          "room_type",
+          "local_event",
+          "nearby_place",
+          "tv_channel",
+          "user_review",
+          "guest_doc",
+          "guest_selfie",
+          "guest_face",
+          "booking_excel",
+          "addon_item"
+        ]
+      },
+      "file_type": {
+        "type": "string",
+        "maxLength": 30,
+        "enum": [
+          "jpg",
+          "jpeg",
+          "png",
+          "svg",
+          "ico",
+          "pdf",
+          "doc",
+          "docx",
+          "xlsx",
+          "xls",
+          "mp4",
+          "ogg",
+          "mov",
+          "webm",
+          "mp3",
+          "wav"
+        ]
+      }
+    },
+    "required": [
+      "media_type",
+      "file_type"
+    ],
+    "additionalProperties": false
+  }

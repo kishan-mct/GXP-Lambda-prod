@@ -1,0 +1,103 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "GxpUserCreate",
+    "type": "object",
+    "properties": {
+      "user_type": {
+        "type": "string",
+        "maxLength": 20,
+        "enum": [
+          "super_admin",
+          "gxp_staff"
+        ]
+      },
+      "is_active": {
+        "type": "boolean"
+      },
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "password": {
+        "type": "string",
+        "minLength": 8,
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$"
+      },
+      "first_name": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "last_name": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "mobile": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "mobile_iso": {
+        "type": "string",
+        "maxLength": 10
+      },
+      "gender": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "profile_picture": {
+        "type": "string"
+      },
+      "date_of_birth": {
+        "type": "string",
+        "format": "date"
+      },
+      "address_line_first": {
+        "type": "string",
+        "maxLength": 250
+      },
+      "address_line_second": {
+        "type": "string",
+        "maxLength": 250
+      },
+      "city": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "state": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "country": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "zip_code": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "special_notes": {
+        "type": "string"
+      },
+      "user_grouppermission": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "access_app_platform": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "required": [
+      "user_type",
+      "email",
+      "password",
+      "access_app_platform",
+      "is_active"
+    ],
+    "additionalProperties": false
+  }

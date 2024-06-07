@@ -70,6 +70,14 @@ def convert_empty_strings_to_none(data):
     return data
 
 
+def string_convert_to_list(value):
+    # Check if the string is empty
+    if value == "{}":
+        return []
+    # Remove the curly braces and split by comma
+    return value.strip('{}').split(',')
+
+
 def read_template_file(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
         return file.read()

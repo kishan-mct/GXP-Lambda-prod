@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HotelBrandCreate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 255
+    },
+    "mobile": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "mobile_iso": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "favicon_icon": {
+      "type": "string",
+      "format": "uri"
+    },
+    "logo": {
+      "type": "string",
+      "format": "uri"
+    },
+    "membership_reward_image": {
+      "type": "string",
+      "format": "uri"
+    },
+    "membership_reward_tnc": {
+      "type": "string"
+    },
+    "rewards_website_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "rewards_website_join_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "is_support_membership_rewards": {
+      "type": "boolean"
+    },
+    "address_line_first": {
+      "type": "string"
+    },
+    "address_line_second": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "zip_code": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "website_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "contact_name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "contact_email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 255
+    },
+    "contact_phone": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "number_of_hotels": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "mobile",
+    "is_active",
+    "is_support_membership_rewards",
+    "address_line_first",
+    "address_line_second",
+    "city",
+    "state",
+    "zip_code",
+    "country",
+    "contact_name",
+    "contact_email",
+    "contact_phone"
+  ],
+  "additionalProperties": false
+}

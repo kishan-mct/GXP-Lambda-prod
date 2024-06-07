@@ -16,7 +16,7 @@ class DBOperations:
         
         lambda_client = boto3.client('lambda')
         response = lambda_client.invoke(
-            FunctionName='arn:aws:lambda:us-east-1:813259119770:function:test-kishan-dev-dbConnection',
+            FunctionName='arn:aws:lambda:us-east-1:813259119770:function:dev-gxp-service-dev-dbConnection',
             InvocationType='RequestResponse',
             Payload=payload
         )
@@ -25,6 +25,9 @@ class DBOperations:
 
     def raw_query(self, query, commit=True):
         return self.execute_query(query, query_type="raw_query", commit=commit)
+    
+    def raw_query_fetchone(self, query, commit=True):
+        return self.execute_query(query, query_type="raw_query_fetchone", commit=commit)
 
     def insert_query(self, tbl_name, record_dict, commit=True):
         values_set = ', '.join(['%s'] * len(record_dict))
@@ -69,6 +72,7 @@ class DBOperations:
         if order_by:
             query += f" ORDER BY {order_by}"
 
+        print("query", query)
         total_records = self.execute_query(count_query, params=params, query_type="get_query")
         total_records_count = total_records["data"]["total_count"] if total_records["data"] else 0
 

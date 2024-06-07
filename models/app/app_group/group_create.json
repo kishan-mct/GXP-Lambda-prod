@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AppGroupCreate",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 150
+        },
+        "is_delete": {
+            "type": "boolean"
+        },
+        "app_grouppermission": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        }
+    },
+    "required": [
+        "name",
+        "is_delete",
+        "app_grouppermission"
+    ],
+    "additionalProperties": false
+}

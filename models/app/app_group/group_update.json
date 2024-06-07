@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AppGroupUpdate",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 150
+        },
+        "app_grouppermission": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "uuid"
+            }
+        }
+    },
+    "additionalProperties": false
+}

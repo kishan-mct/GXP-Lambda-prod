@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AppPlatformCreateUpdate",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "is_active": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "additionalProperties": false
+}

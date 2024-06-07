@@ -1,4 +1,21 @@
-service: test-kishan
+service: dev-gxp-service
+
+custom:
+  corsConfig:
+    origin: '*'
+    headers:
+      - Content-Type
+      - X-Api-Key
+      - authorization
+
+  authorizerConfig:
+    name: JwtAuthorizer
+    resultTtlInSeconds: 0
+    identitySource: method.request.header.Authorization
+  
+  jwtEnvironment:
+    JWT_SECRET: gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-
+
 
 provider:
   name: aws
@@ -27,32 +44,46 @@ provider:
 package:
   include:
     - ../utils/**
-    - ../common/**
     - ../templates/**
-    - ../.env
-
-custom:
-  corsConfig:
-    origin: '*'
-    headers:
-      - Content-Type
-      - X-Api-Key
-      - authorization
-
-  authorizerConfig:
-    name: jwtAuthorizer
-    resultTtlInSeconds: 0
-    identitySource: method.request.header.Authorization
-  
-  jwtEnvironment:
-    JWT_SECRET: gxp-lambda-t8ud@*d!85fc7lfw1ft2d9$=ni@=oo8&#*ae#lzfkg(sej_1(936936-
-
 
 
 functions:
+  # Database Connection
+  dbConnection:
+    handler: app_setting.db_conenction.dbConnection
+    timeout: 20
+
+  # JWT Authentication
+  JwtAuthorizer:
+    handler: app_setting.jwt_auth.JwtAuthorizer
+    timeout: 10
+    environment: ${self:custom.jwtEnvironment}
+
+  # S3 Media File handler
+  s3MediaHandler:
+    handler: app_setting.s3_media.s3MediaHandler
+    events:
+      - http:
+          path: app/s3-media
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/app_setting/s3_media/upload_file.json)}
+      - http:
+          path: app/s3-media
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/app_setting/s3_media/delete_file.json)}
+
+
   # lambda helth check function
   lambdaHealthCheck:
-    handler: common.lambda_health.lambdaHealthCheck
+    handler: app_setting.lambda_health.lambdaHealthCheck
     events:
       - http:
           path: health-check
@@ -63,493 +94,132 @@ functions:
               - Content-Type
               - X-Api-Key
 
-
-  # JWT Authentication
-  jwtAuthorizer:
-    handler: common.jwt_auth.jwtAuthorizer
-    timeout: 10
-    environment: ${self:custom.jwtEnvironment}
-  
-  # Database Connection
-  dbConnection:
-    handler: common.db_conenction.dbConnection
-    timeout: 20
-  
-  generate_presigned_url:
-    handler: utils.generate_presigned_url.generate_presigned_url
-    timeout: 20
-
-  # Users auth login
-  userAuthLogin:
-    handler: user.auth_user.userAuthLogin
-    environment: ${self:custom.jwtEnvironment}
+  # App platform
+  appPlatformListCreateUpdate:
+    handler: app.app_platform.appPlatformListCreateUpdate
     events:
       - http:
-          path: user/login
-          method: post
-          request:
-            schemas:
-              application/json: ${file(../models/user/auth_user/login.json)}
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Api-Key
-      - http:
-          path: user/login
-          method: patch
-          request:
-            schemas:
-              application/json: ${file(../models/user/auth_user/login.json)}
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Api-Key
-
-  # Users get new access token by his referesh token
-  userGetAccessTokebByRefereshToken:
-    handler: user.auth_user.userGetAccessTokebByRefereshToken
-    environment: ${self:custom.jwtEnvironment}
-    events:
-      - http:
-          path: user/access-token
-          method: post
-          cors: ${self:custom.corsConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/user/auth_user/get_access_token.json)}
-
-
-  # User access all hotel list & detail
-  userAccessHotelListDetail:
-    handler: user.auth_user.userAccessHotelListDetail
-    environment: ${self:custom.jwtEnvironment}
-    events:
-      - http:
-          path: user/hotel
+          path: app/app-platform
           method: get
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
       - http:
-          path: user/hotel/{hotel_id}
+          path: app/app-platform
           method: post
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
-  
-  
+          request:
+            schemas:
+              application/json: ${file(../models/app/app_platform/platform_create_update.json)}
 
-  # Users APIS
-  userProfileGetUpdate:
-    handler: user.user.userProfileGetUpdate
+  # App module
+  appModuleListCreateUpdateDestroy:
+    handler: app.app_module.appModuleListCreateUpdateDestroy
     events:
       - http:
-          path: user/profile
+          path: app/app-module
           method: get
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
       - http:
-          path: user/profile
+          path: app/app-module
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/app/app_module/module_create.json)}
+      - http:
+          path: app/app-module/{app_module_id}
           method: patch
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
           request:
             schemas:
-              application/json: ${file(../models/user/user/user_profile_update.json)}
-
-
-  userListCreate:
-    handler: user.user.userListCreate
-    events:
+              application/json: ${file(../models/app/app_module/module_update.json)}
       - http:
-          path: user/user
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: user/user    
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/user/user/create_user.json)}
-
-  userRetrieveUpdateDestroy:
-    handler: user.user.userRetrieveUpdateDestroy
-    events:
-      - http:
-          path: user/user/{id}
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: user/user/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/user/user/update_user.json)}
-      - http:
-          path: user/user/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-
-  userRetrievepermission:
-    handler: user.user.userRetrievepermission
-    events:
-      - http:
-          path: user/user-permission
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-
-   ## app-content-type ##
-  
-  
-  ## Auth Permission APIs ##
-
-  # App content type
-  authAppContentTypeListCreateUpdateDestroy:
-    handler: auth_permission.auth_appcontenttype.authAppContentTypeListCreateUpdateDestroy
-    events:
-      - http:
-          path: auth-permission/app-content-type
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: auth-permission/app-content-type
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/auth_permission/auth_appcontenttype.json)}
-      - http:
-          path: auth-permission/app-content-type/{auth_appcontenttype_id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/auth_permission/auth_appcontenttype.json)}
-      - http:
-          path: auth-permission/app-content-type/{auth_appcontenttype_id}
+          path: app/app-module/{app_module_id}
           method: delete
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
   
 
   # App permission
-  authPermissionListCreateUpdateDestroy:
-    handler: auth_permission.auth_permission.authPermissionListCreateUpdateDestroy
+  appPermissionListCreateUpdateDestroy:
+    handler: app.app_permission.appPermissionListCreateUpdateDestroy
     events:
       - http:
-          path: auth-permission/auth-permission
+          path: app/app-permission
           method: get
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
       - http:
-          path: auth-permission/auth-permission
+          path: app/app-permission
           method: post
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
           request:
             schemas:
-              application/json: ${file(../models/auth_permission/auth_permission.json)}
+              application/json: ${file(../models/app/app_permission/permission_create.json)}
       - http:
-          path: auth-permission/auth-permission/{auth_permission_id}
+          path: app/app-permission/{app_permission_id}
           method: patch
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
           request:
             schemas:
-              application/json: ${file(../models/auth_permission/auth_permission.json)}
+              application/json: ${file(../models/app/app_permission/permission_update.json)}
       - http:
-          path: auth-permission/auth-permission/{auth_permission_id}
+          path: app/app-permission/{app_permission_id}
           method: delete
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
 
 
   # Auth group
-  authGroupListCreateUpdateDestroy:
-    handler: auth_permission.auth_group.authGroupListCreateUpdateDestroy
+  appGroupListCreateUpdateDestroy:
+    handler: app.app_group.appGroupListCreateUpdateDestroy
     events:
       - http:
-          path: auth-permission/auth-group
+          path: app/app-group
           method: get
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
       - http:
-          path: auth-permission/auth-group
+          path: app/app-group
           method: post
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
           request:
             schemas:
-              application/json: ${file(../models/auth_permission/auth_group.json)}
+              application/json: ${file(../models/app/app_group/group_create.json)}
       - http:
-          path: auth-permission/auth-group/{auth_group_id}
+          path: app/app-group/{app_group_id}
           method: patch
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
           request:
             schemas:
-              application/json: ${file(../models/auth_permission/auth_group.json)}
+              application/json: ${file(../models/app/app_group/group_update.json)}
       - http:
-          path: auth-permission/auth-group/{auth_group_id}
+          path: app/app-group/{app_group_id}
           method: delete
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
 
-  ## hotel ##
-  # hotel 
-  hotelListCreate:
-    handler: hotel.hotel.hotelListCreate
-    events:
-      - http:
-          path: hotel/hotel
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: hotel/hotel
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/hotel/hotel.json)}
-    
-  hotelUpdateDestroy:
-    handler: hotel.hotel.hotelUpdateDestroy
-    events:
-      - http:
-          path: hotel/hotel/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/hotel/hotel.json)}
-      - http:
-          path: hotel/hotel/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
 
-  # hotel brand
-  hotelBrandListCreate:
-    handler: hotel.hotel_brand.hotelBrandListCreate
-    events:
-      - http:
-          path: hotel/hotel-brand
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: hotel/hotel-brand
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/hotel/brand.json)}
+resources:
+  - Outputs:
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:service}-${self:provider.stage}-ApiGatewayRestApiId
 
-  hotelBrandUpdateDestroy:
-    handler: hotel.hotel_brand.hotelBrandUpdateDestroy
-    events:
-      - http:
-          path: hotel/hotel-brand/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          request:
-            schemas:
-              application/json: ${file(../models/hotel/brand.json)}
-      - http:
-          path: hotel/hotel-brand/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-  
-  ## room ##
-  
-  # room building
-  buildingListCreate:
-    handler: room.building.buildingListCreate
-    events:
-      - http:
-          path: room/room-building
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: room/room-building
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/building.json)}
-
-  buildingUpdateDestroy:
-    handler: room.building.buildingUpdateDestroy
-    events:
-      - http:
-          path: room/room-building/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/building.json)}
-      - http:
-          path: room/room-building/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-
-  # room floor
-  floorListCreate:
-    handler: room.floor.floorListCreate
-    events:
-      - http:
-          path: room/room-floor
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: room/room-floor
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/floor.json)}
-
-  floorUpdateDestroy:
-    handler: room.floor.floorUpdateDestroy
-    events:
-      - http:
-          path: room/room-floor/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/floor.json)}
-      - http:
-          path: room/room-floor/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-
-  # room type
-  roomTypeListCreate:
-    handler: room.room_type.roomTypeListCreate
-    events:
-      - http:
-          path: room/room-type
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: room/room-type
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/room_type.json)}
-
-  roomTypeUpdateDestroy:
-    handler: room.room_type.roomTypeUpdateDestroy
-    events:
-      - http:
-          path: room/room-type/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/room_type.json)}
-      - http:
-          path: room/room-type/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-  
-  # room
-  roomListCreate:
-    handler: room.room.roomListCreate
-    events:
-      - http:
-          path: room/room
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: room/room
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/room.json)}
-
-  roomUpdateDestroy:
-    handler: room.room.roomUpdateDestroy
-    events:
-      - http:
-          path: room/room/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/room.json)}
-      - http:
-          path: room/room/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-  
-  # rate plan
-  ratePlanListCreate:
-    handler: room.rate_plan.ratePlanListCreate
-    events:
-      - http:
-          path: room/rate-plan
-          method: get
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-      - http:
-          path: room/rate-plan
-          method: post
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/rate_plan.json)}
-
-  ratePlanUpdateDestroy:
-    handler: room.rate_plan.ratePlanUpdateDestroy
-    events:
-      - http:
-          path: room/rate-plan/{id}
-          method: patch
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
-          # request:
-          #   schemas:
-          #     application/json: ${file(../models/room/rate_plan.json)}
-      - http:
-          path: room/rate-plan/{id}
-          method: delete
-          cors: ${self:custom.corsConfig}
-          authorizer: ${self:custom.authorizerConfig}
+      ApiGatewayRestApiRootResourceId:
+        Value:
+          Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        Export:
+          Name: ${self:service}-${self:provider.stage}-ApiGatewayRestApiRootResourceId
