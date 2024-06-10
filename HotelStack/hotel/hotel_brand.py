@@ -3,11 +3,13 @@ import uuid
 import sys
 
 from utils.db_operations import DBOperations
+from utils.s3_operations import S3Operations
 from utils.common_functions import json_serializer, convert_empty_strings_to_none
 from utils.authentication import IsSuperAdmin
 from utils.filter import filter_execute_query
 
 gxp_db = DBOperations("gxp-dev")
+s3_operations = S3Operations()
 
 @IsSuperAdmin
 def hotelBrandCreateUpdateDestroy(event, context):
@@ -79,7 +81,6 @@ def hotelBrandlist(event, context):
     try:
         if http_method == 'GET':
             multi_value_qp = event['multiValueQueryStringParameters'] or {}
-            print("multi_value_qp",multi_value_qp)
             page_size = multi_value_qp.pop('page_size', [None])[0]
             page_number = multi_value_qp.pop('page_number', [1])[0]
             order_by = multi_value_qp.pop('order_by', ["name"])[0]
@@ -92,6 +93,10 @@ def hotelBrandlist(event, context):
             
             else:
                 query_result = filter_execute_query("hotel_brand", get_columns, filters, page_size, page_number,order_by)
+                
+                logos = query_result["data"]
+                [logo.update({"logo": s3_operations.public_access_level_urls(logo["logo"])}) for logo in logos if logo.get("logo")]
+
         else:
             status_code = 405
             query_result["message"] = f'Unsupported HTTP method: {http_method}'

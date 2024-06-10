@@ -81,6 +81,12 @@ class S3Operations:
         
         return urls
     
+    def public_access_level_urls(self,file_key):
+        base_url = "https://devgxp.s3.amazonaws.com/dev/"
+        if file_key and not file_key.startswith("http"):
+            return f"{base_url}{file_key}"
+        return None
+    
     def list_files(self):
         response = s3_client.list_objects_v2(Bucket=self.bucket, Prefix=self.location)
         keys = [item['Key'] for item in response.get('Contents', [])]
@@ -94,4 +100,3 @@ class S3Operations:
     def delete_file(self, key):
         response = s3_client.delete_objects(Bucket=self.bucket, Delete={'Objects': [{'Key': key}]})
         return response
-

@@ -54,7 +54,9 @@ def s3MediaHandler(event, context):
                 }
                 file_key = f"hotel/{hotel_id}/{media_paths[media_type]}/{uuid.uuid4()}.{file_type}"
 
+            presign_urls = s3_operations.get_files(file_key)
             presign_url = s3_operations.upload_file(file_key, access_level)
+            
             
             if presign_url:
                 # Remove the query parameters part
@@ -65,9 +67,9 @@ def s3MediaHandler(event, context):
 
                 # Join the relevant parts to form the desired string
                 database_url = '/'.join(parts[4:])
-
+            
                 response_body["status"] = True
-                response_body["data"] = {"presign_url": presign_url, "database_url": database_url}
+                response_body["data"] = {"presign_url": presign_url,"presign_url_get": presign_urls, "database_url": database_url}
             else:
                 response_body["message"] = "Failed to generate presign URL"
 

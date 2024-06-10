@@ -67,8 +67,8 @@ def filter_execute_query(table_name, columns, filters, page_size, page_number,or
         columns=columns,
         condition=condition,
         params=params,
+        order_by=order_by,
         page_size=page_size,
         page_number=page_number,       
-        order_by=order_by,
 
     )

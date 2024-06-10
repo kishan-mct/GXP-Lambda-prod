@@ -135,6 +135,18 @@
               "LogGroupName": "/aws/lambda/dev-gxp-service-hotel-dev-roomTypeUpdateDestroy"
             }
           },
+          "HotelListCreateLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/dev-gxp-service-hotel-dev-hotelListCreate"
+            }
+          },
+          "HotelUpdateDestroyLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/dev-gxp-service-hotel-dev-hotelUpdateDestroy"
+            }
+          },
           "HotelBrandlistLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -235,7 +247,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "common.jwt_auth.JwtAuthorizer",
               "Runtime": "python3.9",
@@ -269,7 +281,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "hotel.hotel.hotelListCreateUpdateDestroy",
               "Runtime": "python3.9",
@@ -302,7 +314,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "hotel.room_type.roomTypeListCreate",
               "Runtime": "python3.9",
@@ -335,7 +347,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "hotel.room_type.roomTypeUpdateDestroy",
               "Runtime": "python3.9",
@@ -361,6 +373,72 @@
               "RoomTypeUpdateDestroyLogGroup"
             ]
           },
+          "HotelListCreateLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
+              },
+              "Handler": "hotel.hotel.hotelListCreate",
+              "Runtime": "python3.9",
+              "FunctionName": "dev-gxp-service-hotel-dev-hotelListCreate",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MY_API_KEY": "dev-gxp-service_apikey_dev"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              },
+              "Layers": [
+                "arn:aws:lambda:us-east-1:813259119770:layer:GXP-Lambda:1"
+              ]
+            },
+            "DependsOn": [
+              "HotelListCreateLogGroup"
+            ]
+          },
+          "HotelUpdateDestroyLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
+              },
+              "Handler": "hotel.hotel.hotelUpdateDestroy",
+              "Runtime": "python3.9",
+              "FunctionName": "dev-gxp-service-hotel-dev-hotelUpdateDestroy",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MY_API_KEY": "dev-gxp-service_apikey_dev"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              },
+              "Layers": [
+                "arn:aws:lambda:us-east-1:813259119770:layer:GXP-Lambda:1"
+              ]
+            },
+            "DependsOn": [
+              "HotelUpdateDestroyLogGroup"
+            ]
+          },
           "HotelBrandlistLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -368,7 +446,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "hotel.hotel_brand.hotelBrandlist",
               "Runtime": "python3.9",
@@ -401,7 +479,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z/dev-gxp-service-hotel.zip"
+                "S3Key": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z/dev-gxp-service-hotel.zip"
               },
               "Handler": "hotel.hotel_brand.hotelBrandCreateUpdateDestroy",
               "Runtime": "python3.9",
@@ -427,64 +505,84 @@
               "HotelBrandCreateUpdateDestroyLogGroup"
             ]
           },
-          "JwtAuthorizer2LambdaVersionZlxy08PGgIn5zciYxi8950hzIntWibNMYYZuDU8Pc": {
+          "JwtAuthorizer2LambdaVersionO7gH75hnDIK1LFOudMct4CkWz7BRwdEULK6QpTEOms": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "JwtAuthorizer2LambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
-          "HotelListCreateUpdateDestroyLambdaVersion0wD2oe5nwjfTURBZBizRhh463Kpdg5snIyO1HarV0U": {
+          "HotelListCreateUpdateDestroyLambdaVersionQZZ6KsdBZtsYco8sbErC8sDMpHUYOXzqjjk2z47js4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HotelListCreateUpdateDestroyLambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
-          "RoomTypeListCreateLambdaVersion9NScJvVKEzCIBWF04tgdi63fqjiVX3dJaTpEHUCbw4": {
+          "RoomTypeListCreateLambdaVersionrEXBGy9E1XxtYlhnTTVmq2h0wlOy04vGByL9XJNUqo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RoomTypeListCreateLambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
-          "RoomTypeUpdateDestroyLambdaVersionkPoEXV6GxTU9WIeNMBiS7QofFEahjqtY3QawOO0R94": {
+          "RoomTypeUpdateDestroyLambdaVersionaspAKO8fwyfH4J0DM4zz3YhDJClKbq43OgwCIe9Sk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RoomTypeUpdateDestroyLambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
-          "HotelBrandlistLambdaVersionbdtVEYY22FqXuo7wRlRLCv6JW29uGxxpsIRtC697s": {
+          "HotelListCreateLambdaVersionH1N6isc0LhbhW4FUbsaaPSkWdM9upypxyAHaEZsDxA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HotelListCreateLambdaFunction"
+              },
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
+            }
+          },
+          "HotelUpdateDestroyLambdaVersionOsjZ2jSi89LoeBWB1cOrAHKAvalblEgPiMFYefDIoc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HotelUpdateDestroyLambdaFunction"
+              },
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
+            }
+          },
+          "HotelBrandlistLambdaVersion6g7Ya5Pc9GFPbkfEfV1Sa5XFYU3u2ygNFgzr8OKc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HotelBrandlistLambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
-          "HotelBrandCreateUpdateDestroyLambdaVersion0Z7XxOb7QOXoMqbe8dowIy9IPFjwyfQvIsuj7SSCY2M": {
+          "HotelBrandCreateUpdateDestroyLambdaVersionYC9n6FIJ0Ndcnv7W56EtYCpVeTqob2nzQAawUMpasw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HotelBrandCreateUpdateDestroyLambdaFunction"
               },
-              "CodeSha256": "ZQnruTzNTy8NFChBeQbZtm8TIC4wNuN9AaUEX4CEucc="
+              "CodeSha256": "ubkatiMtlFJQGB/k7eLtykeFk6+Dx8JL9p6uBzcYBrI="
             }
           },
           "ApiGatewayResourceHotel": {
@@ -506,6 +604,18 @@
                 "Ref": "ApiGatewayResourceHotel"
               },
               "PathPart": "hotel",
+              "RestApiId": {
+                "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
+              }
+            }
+          },
+          "ApiGatewayResourceHotelHotelIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceHotelHotel"
+              },
+              "PathPart": "{id}",
               "RestApiId": {
                 "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
               }
@@ -600,7 +710,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Api-Key,authorization'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PATCH,GET'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET,PATCH'"
                     },
                     "ResponseTemplates": {
                       "application/json": ""
@@ -700,6 +810,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceRoomRoomDashtypeIdVar"
+              },
+              "RestApiId": {
+                "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
+              }
+            }
+          },
+          "ApiGatewayMethodHotelHotelIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Api-Key,authorization'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,PATCH'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceHotelHotelIdVar"
               },
               "RestApiId": {
                 "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
@@ -830,7 +985,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "HotelListCreateUpdateDestroyLambdaFunction",
+                          "HotelListCreateLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1090,6 +1245,169 @@
               "JwtAuthorizer2ApiGatewayAuthorizer"
             ]
           },
+          "ApiGatewayMethodHotelHotelPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceHotelHotel"
+              },
+              "RestApiId": {
+                "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "CUSTOM",
+              "AuthorizerId": {
+                "Ref": "JwtAuthorizer2ApiGatewayAuthorizer"
+              },
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "HotelListCreateLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [],
+              "RequestValidatorId": {
+                "Ref": "ApiGatewayDevgxpservicehotelRequestValidator"
+              },
+              "RequestModels": {
+                "application/json": {
+                  "Ref": "ApiGatewayMethodHotelHotelPostApplicationJsonModel"
+                }
+              }
+            },
+            "DependsOn": [
+              "JwtAuthorizer2ApiGatewayAuthorizer"
+            ]
+          },
+          "ApiGatewayMethodHotelHotelIdVarPatch": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PATCH",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceHotelHotelIdVar"
+              },
+              "RestApiId": {
+                "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "CUSTOM",
+              "AuthorizerId": {
+                "Ref": "JwtAuthorizer2ApiGatewayAuthorizer"
+              },
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "HotelUpdateDestroyLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [],
+              "RequestValidatorId": {
+                "Ref": "ApiGatewayDevgxpservicehotelRequestValidator"
+              },
+              "RequestModels": {
+                "application/json": {
+                  "Ref": "ApiGatewayMethodHotelHotelIdVarPatchApplicationJsonModel"
+                }
+              }
+            },
+            "DependsOn": [
+              "JwtAuthorizer2ApiGatewayAuthorizer"
+            ]
+          },
+          "ApiGatewayMethodHotelHotelIdVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceHotelHotelIdVar"
+              },
+              "RestApiId": {
+                "Fn::ImportValue": "dev-gxp-service-dev-ApiGatewayRestApiId"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "CUSTOM",
+              "AuthorizerId": {
+                "Ref": "JwtAuthorizer2ApiGatewayAuthorizer"
+              },
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "HotelUpdateDestroyLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "JwtAuthorizer2ApiGatewayAuthorizer"
+            ]
+          },
           "ApiGatewayMethodHotelHotelDashbrandGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -1313,6 +1631,474 @@
               "Name": "dev-gxp-service-hotel-dev | Validate request body and querystring parameters"
             }
           },
+          "ApiGatewayMethodHotelHotelPostApplicationJsonModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "$ref": "$[\"service\"][\"provider\"][\"apiGateway\"][\"restApiId\"]"
+              },
+              "ContentType": "application/json",
+              "Schema": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "title": "Create_Hotel",
+                "type": "object",
+                "properties": {
+                  "brand_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "group_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "hotel_name": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "property_code": {
+                    "type": "string",
+                    "maxLength": 8
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 255
+                  },
+                  "billing_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "front_desk_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "gxp_app_theme_color": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "payment_gateway_type": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "favicon_icon": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "check_in_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "check_out_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "early_check_in_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "late_check_out_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "time_zone": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "time_formate": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "date_format": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "date_time_format": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "address": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "city": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "state": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "zip_code": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "country": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "website": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "format": "uri"
+                  },
+                  "map_location_url": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "format": "uri"
+                  },
+                  "front_desk_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "whatsapp_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "sms_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "sms_number_iso": {
+                    "type": "string",
+                    "maxLength": 10
+                  },
+                  "manager_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "manager_name": {
+                    "type": "string",
+                    "maxLength": 250
+                  },
+                  "manager_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "total_rooms": {
+                    "type": "integer"
+                  },
+                  "wifi_password": {
+                    "type": "string",
+                    "maxLength": 30
+                  },
+                  "g_business_detail": {
+                    "type": "object",
+                    "default": {}
+                  },
+                  "g_place_id": {
+                    "type": "string",
+                    "maxLength": 250
+                  },
+                  "g_rating": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10
+                  },
+                  "notes": {
+                    "type": "string"
+                  },
+                  "is_active": {
+                    "type": "boolean"
+                  },
+                  "is_email_service": {
+                    "type": "boolean"
+                  },
+                  "is_sms_service": {
+                    "type": "boolean"
+                  },
+                  "is_gxp_app_service": {
+                    "type": "boolean"
+                  },
+                  "is_mobile_key_support": {
+                    "type": "boolean"
+                  },
+                  "is_pms_connection": {
+                    "type": "boolean"
+                  },
+                  "hotel_domain": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                },
+                "required": [
+                  "brand_id",
+                  "hotel_name",
+                  "property_code",
+                  "email",
+                  "gxp_app_theme_color",
+                  "currency",
+                  "check_in_time",
+                  "check_out_time",
+                  "early_check_in_time",
+                  "late_check_out_time",
+                  "time_zone",
+                  "time_formate",
+                  "date_format",
+                  "date_time_format",
+                  "address",
+                  "city",
+                  "state",
+                  "zip_code",
+                  "country",
+                  "latitude",
+                  "longitude",
+                  "map_location_url",
+                  "front_desk_number",
+                  "sms_number_iso",
+                  "total_rooms",
+                  "g_business_detail",
+                  "g_rating",
+                  "is_active",
+                  "is_email_service",
+                  "is_sms_service",
+                  "is_gxp_app_service",
+                  "is_mobile_key_support",
+                  "is_pms_connection"
+                ]
+              }
+            }
+          },
+          "ApiGatewayMethodHotelHotelIdVarPatchApplicationJsonModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "$ref": "$[\"service\"][\"provider\"][\"apiGateway\"][\"restApiId\"]"
+              },
+              "ContentType": "application/json",
+              "Schema": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "title": "update_Hotel",
+                "type": "object",
+                "properties": {
+                  "brand_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "group_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "hotel_name": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "property_code": {
+                    "type": "string",
+                    "maxLength": 8
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 255
+                  },
+                  "billing_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "front_desk_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "gxp_app_theme_color": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "payment_gateway_type": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "favicon_icon": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "check_in_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "check_out_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "early_check_in_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "late_check_out_time": {
+                    "type": "string",
+                    "format": "time"
+                  },
+                  "time_zone": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "time_formate": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "date_format": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "date_time_format": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "address": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "city": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "state": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "zip_code": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "country": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "website": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "format": "uri"
+                  },
+                  "map_location_url": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "format": "uri"
+                  },
+                  "front_desk_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "whatsapp_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "sms_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "sms_number_iso": {
+                    "type": "string",
+                    "maxLength": 10
+                  },
+                  "manager_email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 250
+                  },
+                  "manager_name": {
+                    "type": "string",
+                    "maxLength": 250
+                  },
+                  "manager_number": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "total_rooms": {
+                    "type": "integer"
+                  },
+                  "wifi_password": {
+                    "type": "string",
+                    "maxLength": 30
+                  },
+                  "g_business_detail": {
+                    "type": "object",
+                    "default": {}
+                  },
+                  "g_place_id": {
+                    "type": "string",
+                    "maxLength": 250
+                  },
+                  "g_rating": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10
+                  },
+                  "notes": {
+                    "type": "string"
+                  },
+                  "is_active": {
+                    "type": "boolean"
+                  },
+                  "is_email_service": {
+                    "type": "boolean"
+                  },
+                  "is_sms_service": {
+                    "type": "boolean"
+                  },
+                  "is_gxp_app_service": {
+                    "type": "boolean"
+                  },
+                  "is_mobile_key_support": {
+                    "type": "boolean"
+                  },
+                  "is_pms_connection": {
+                    "type": "boolean"
+                  },
+                  "hotel_domain": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                },
+                "required": [
+                  "hotel_name"
+                ]
+              }
+            }
+          },
           "ApiGatewayMethodHotelHotelDashbrandPostApplicationJsonModel": {
             "Type": "AWS::ApiGateway::Model",
             "Properties": {
@@ -1347,8 +2133,7 @@
                     "format": "uri"
                   },
                   "logo": {
-                    "type": "string",
-                    "format": "uri"
+                    "type": "string"
                   },
                   "membership_reward_image": {
                     "type": "string",
@@ -1575,7 +2360,7 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1717756981114": {
+          "ApiGatewayDeployment1718002126392": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1587,6 +2372,7 @@
               "ApiGatewayMethodHotelHotelOptions",
               "ApiGatewayMethodRoomRoomDashtypeOptions",
               "ApiGatewayMethodRoomRoomDashtypeIdVarOptions",
+              "ApiGatewayMethodHotelHotelIdVarOptions",
               "ApiGatewayMethodHotelHotelDashbrandOptions",
               "ApiGatewayMethodHotelHotelDashbrandIdVarOptions",
               "ApiGatewayMethodHotelHotelGet",
@@ -1595,6 +2381,10 @@
               "ApiGatewayMethodRoomRoomDashtypePost",
               "ApiGatewayMethodRoomRoomDashtypeIdVarPatch",
               "ApiGatewayMethodRoomRoomDashtypeIdVarDelete",
+              "ApiGatewayMethodHotelHotelGet",
+              "ApiGatewayMethodHotelHotelPost",
+              "ApiGatewayMethodHotelHotelIdVarPatch",
+              "ApiGatewayMethodHotelHotelIdVarDelete",
               "ApiGatewayMethodHotelHotelDashbrandGet",
               "ApiGatewayMethodHotelHotelDashbrandPost",
               "ApiGatewayMethodHotelHotelDashbrandIdVarPatch",
@@ -1749,6 +2539,80 @@
               }
             }
           },
+          "HotelListCreateLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HotelListCreateLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "$ref": "$[\"service\"][\"provider\"][\"apiGateway\"][\"restApiId\"]"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HotelUpdateDestroyLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HotelUpdateDestroyLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "$ref": "$[\"service\"][\"provider\"][\"apiGateway\"][\"restApiId\"]"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "HotelBrandlistLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -1836,7 +2700,7 @@
           "JwtAuthorizer2LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "JwtAuthorizer2LambdaVersionZlxy08PGgIn5zciYxi8950hzIntWibNMYYZuDU8Pc"
+              "Ref": "JwtAuthorizer2LambdaVersionO7gH75hnDIK1LFOudMct4CkWz7BRwdEULK6QpTEOms"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-JwtAuthorizer2LambdaFunctionQualifiedArn"
@@ -1845,7 +2709,7 @@
           "HotelListCreateUpdateDestroyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HotelListCreateUpdateDestroyLambdaVersion0wD2oe5nwjfTURBZBizRhh463Kpdg5snIyO1HarV0U"
+              "Ref": "HotelListCreateUpdateDestroyLambdaVersionQZZ6KsdBZtsYco8sbErC8sDMpHUYOXzqjjk2z47js4"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-HotelListCreateUpdateDestroyLambdaFunctionQualifiedArn"
@@ -1854,7 +2718,7 @@
           "RoomTypeListCreateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RoomTypeListCreateLambdaVersion9NScJvVKEzCIBWF04tgdi63fqjiVX3dJaTpEHUCbw4"
+              "Ref": "RoomTypeListCreateLambdaVersionrEXBGy9E1XxtYlhnTTVmq2h0wlOy04vGByL9XJNUqo"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-RoomTypeListCreateLambdaFunctionQualifiedArn"
@@ -1863,16 +2727,34 @@
           "RoomTypeUpdateDestroyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RoomTypeUpdateDestroyLambdaVersionkPoEXV6GxTU9WIeNMBiS7QofFEahjqtY3QawOO0R94"
+              "Ref": "RoomTypeUpdateDestroyLambdaVersionaspAKO8fwyfH4J0DM4zz3YhDJClKbq43OgwCIe9Sk"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-RoomTypeUpdateDestroyLambdaFunctionQualifiedArn"
             }
           },
+          "HotelListCreateLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HotelListCreateLambdaVersionH1N6isc0LhbhW4FUbsaaPSkWdM9upypxyAHaEZsDxA"
+            },
+            "Export": {
+              "Name": "sls-dev-gxp-service-hotel-dev-HotelListCreateLambdaFunctionQualifiedArn"
+            }
+          },
+          "HotelUpdateDestroyLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HotelUpdateDestroyLambdaVersionOsjZ2jSi89LoeBWB1cOrAHKAvalblEgPiMFYefDIoc"
+            },
+            "Export": {
+              "Name": "sls-dev-gxp-service-hotel-dev-HotelUpdateDestroyLambdaFunctionQualifiedArn"
+            }
+          },
           "HotelBrandlistLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HotelBrandlistLambdaVersionbdtVEYY22FqXuo7wRlRLCv6JW29uGxxpsIRtC697s"
+              "Ref": "HotelBrandlistLambdaVersion6g7Ya5Pc9GFPbkfEfV1Sa5XFYU3u2ygNFgzr8OKc"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-HotelBrandlistLambdaFunctionQualifiedArn"
@@ -1881,7 +2763,7 @@
           "HotelBrandCreateUpdateDestroyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HotelBrandCreateUpdateDestroyLambdaVersion0Z7XxOb7QOXoMqbe8dowIy9IPFjwyfQvIsuj7SSCY2M"
+              "Ref": "HotelBrandCreateUpdateDestroyLambdaVersionYC9n6FIJ0Ndcnv7W56EtYCpVeTqob2nzQAawUMpasw"
             },
             "Export": {
               "Name": "sls-dev-gxp-service-hotel-dev-HotelBrandCreateUpdateDestroyLambdaFunctionQualifiedArn"
@@ -2033,7 +2915,7 @@
         "memory": 1024,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "JwtAuthorizer2LambdaVersionZlxy08PGgIn5zciYxi8950hzIntWibNMYYZuDU8Pc"
+        "versionLogicalId": "JwtAuthorizer2LambdaVersionO7gH75hnDIK1LFOudMct4CkWz7BRwdEULK6QpTEOms"
       },
       "hotelListCreateUpdateDestroy": {
         "handler": "hotel.hotel.hotelListCreateUpdateDestroy",
@@ -2105,7 +2987,7 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "HotelListCreateUpdateDestroyLambdaVersion0wD2oe5nwjfTURBZBizRhh463Kpdg5snIyO1HarV0U"
+        "versionLogicalId": "HotelListCreateUpdateDestroyLambdaVersionQZZ6KsdBZtsYco8sbErC8sDMpHUYOXzqjjk2z47js4"
       },
       "roomTypeListCreate": {
         "handler": "hotel.room_type.roomTypeListCreate",
@@ -2177,7 +3059,7 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "RoomTypeListCreateLambdaVersion9NScJvVKEzCIBWF04tgdi63fqjiVX3dJaTpEHUCbw4"
+        "versionLogicalId": "RoomTypeListCreateLambdaVersionrEXBGy9E1XxtYlhnTTVmq2h0wlOy04vGByL9XJNUqo"
       },
       "roomTypeUpdateDestroy": {
         "handler": "hotel.room_type.roomTypeUpdateDestroy",
@@ -2249,7 +3131,165 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "RoomTypeUpdateDestroyLambdaVersionkPoEXV6GxTU9WIeNMBiS7QofFEahjqtY3QawOO0R94"
+        "versionLogicalId": "RoomTypeUpdateDestroyLambdaVersionaspAKO8fwyfH4J0DM4zz3YhDJClKbq43OgwCIe9Sk"
+      },
+      "hotelListCreate": {
+        "handler": "hotel.hotel.hotelListCreate",
+        "events": [
+          {
+            "http": {
+              "path": "hotel/hotel",
+              "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Api-Key",
+                  "authorization"
+                ],
+                "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "JwtAuthorizer2",
+                "arn": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"JwtAuthorizer2LambdaPermissionApiGateway\"][\"Properties\"][\"FunctionName\"]"
+                },
+                "managedExternally": false,
+                "resultTtlInSeconds": 0,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "hotel/hotel",
+              "method": "post",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Api-Key",
+                  "authorization"
+                ],
+                "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "JwtAuthorizer2",
+                "arn": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"JwtAuthorizer2LambdaPermissionApiGateway\"][\"Properties\"][\"FunctionName\"]"
+                },
+                "managedExternally": false,
+                "resultTtlInSeconds": 0,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
+              "request": {
+                "schemas": {
+                  "application/json": {
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodHotelHotelPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                  }
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "dev-gxp-service-hotel-dev-hotelListCreate",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.9",
+        "vpc": {},
+        "versionLogicalId": "HotelListCreateLambdaVersionH1N6isc0LhbhW4FUbsaaPSkWdM9upypxyAHaEZsDxA"
+      },
+      "hotelUpdateDestroy": {
+        "handler": "hotel.hotel.hotelUpdateDestroy",
+        "events": [
+          {
+            "http": {
+              "path": "hotel/hotel/{id}",
+              "method": "patch",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "PATCH"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Api-Key",
+                  "authorization"
+                ],
+                "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "JwtAuthorizer2",
+                "arn": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"JwtAuthorizer2LambdaPermissionApiGateway\"][\"Properties\"][\"FunctionName\"]"
+                },
+                "managedExternally": false,
+                "resultTtlInSeconds": 0,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
+              "request": {
+                "schemas": {
+                  "application/json": {
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodHotelHotelIdVarPatchApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                  }
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "hotel/hotel/{id}",
+              "method": "delete",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "DELETE"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Api-Key",
+                  "authorization"
+                ],
+                "allowCredentials": false
+              },
+              "authorizer": {
+                "name": "JwtAuthorizer2",
+                "arn": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"JwtAuthorizer2LambdaPermissionApiGateway\"][\"Properties\"][\"FunctionName\"]"
+                },
+                "managedExternally": false,
+                "resultTtlInSeconds": 0,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "dev-gxp-service-hotel-dev-hotelUpdateDestroy",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "python3.9",
+        "vpc": {},
+        "versionLogicalId": "HotelUpdateDestroyLambdaVersionOsjZ2jSi89LoeBWB1cOrAHKAvalblEgPiMFYefDIoc"
       },
       "hotelBrandlist": {
         "handler": "hotel.hotel_brand.hotelBrandlist",
@@ -2291,7 +3331,7 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "HotelBrandlistLambdaVersionbdtVEYY22FqXuo7wRlRLCv6JW29uGxxpsIRtC697s"
+        "versionLogicalId": "HotelBrandlistLambdaVersion6g7Ya5Pc9GFPbkfEfV1Sa5XFYU3u2ygNFgzr8OKc"
       },
       "hotelBrandCreateUpdateDestroy": {
         "handler": "hotel.hotel_brand.hotelBrandCreateUpdateDestroy",
@@ -2407,7 +3447,7 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "HotelBrandCreateUpdateDestroyLambdaVersion0Z7XxOb7QOXoMqbe8dowIy9IPFjwyfQvIsuj7SSCY2M"
+        "versionLogicalId": "HotelBrandCreateUpdateDestroyLambdaVersionYC9n6FIJ0Ndcnv7W56EtYCpVeTqob2nzQAawUMpasw"
       }
     },
     "configValidationMode": "warn",
@@ -2428,7 +3468,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/dev-gxp-service-hotel/dev/code-artifacts",
         "artifact": "C:\\Users\\kisha\\Desktop\\pms_dev\\GXP-Lambda\\HotelStack\\.serverless\\dev-gxp-service-hotel.zip",
-        "artifactDirectoryName": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z"
+        "artifactDirectoryName": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -2439,7 +3479,7 @@
     "artifact": "C:\\Users\\kisha\\Desktop\\pms_dev\\GXP-Lambda\\HotelStack\\.serverless\\dev-gxp-service-hotel.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/dev-gxp-service-hotel/dev/1717756987862-2024-06-07T10:43:07.862Z",
+    "artifactDirectoryName": "serverless/dev-gxp-service-hotel/dev/1718002131030-2024-06-10T06:48:51.030Z",
     "artifact": "dev-gxp-service-hotel.zip"
   }
 }

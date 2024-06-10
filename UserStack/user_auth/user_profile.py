@@ -3,10 +3,11 @@ import sys
 from passlib.hash import pbkdf2_sha256
 
 from utils.db_operations import DBOperations
+from utils.s3_operations import S3Operations
 from utils.common_functions import json_serializer, convert_empty_strings_to_none
 
 gxp_db = DBOperations("gxp-dev")
-
+s3_operations = S3Operations()
 user_detail_column = ["id", "first_name", "last_name", "email", "mobile", "mobile_iso", "is_active", "date_joined", "gender",
                     "profile_picture", "device_data", "date_of_birth", "address_line_first", "address_line_second", "zip_code",
                     "city", "state", "country", "special_notes", "is_email_verify", "last_login", "ip_address",
@@ -44,10 +45,13 @@ def userProfileGetUpdate(event, context):
             """
             
             user_userpermission = gxp_db.raw_query_fetchone(permissions_query)
+            user_profile = query_result["data"]
+
             if query_result["status"]:
                 query_result["data"]["access_permissions"] = user_userpermission["data"]["access_permissions"]
+                 
+            user_profile["profile_picture"] = s3_operations.get_files(user_profile["profile_picture"]) if user_profile.get("profile_picture") else None
 
-            
         elif http_method == 'PATCH':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
             # Check if the email already exists

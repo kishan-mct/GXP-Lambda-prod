@@ -112,6 +112,7 @@ def hotelUserListCreateUpdateDestroy(event, context):
                     
                     query_result = gxp_db.select_query(table, column, condition=condition, params=parameter, order_by=order_by, 
                                                     page_size=page_size, page_number=page_number)
+                                                    
 
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
