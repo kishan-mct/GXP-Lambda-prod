@@ -64,6 +64,12 @@ functions:
     handler: app_setting.s3_media.s3MediaHandler
     events:
       - http:
+          path: app/s3-media/get
+          method: put
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+
+      - http:
           path: app/s3-media
           method: post
           cors: ${self:custom.corsConfig}

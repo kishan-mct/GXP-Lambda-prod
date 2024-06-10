@@ -1,0 +1,241 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Create_Hotel",
+    "type": "object",
+    "properties": {
+        "brand_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "group_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "hotel_name": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "property_code": {
+            "type": "string",
+            "maxLength": 8
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255
+        },
+        "billing_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "front_desk_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "gxp_app_theme_color": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "payment_gateway_type": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "favicon_icon": {
+            "type": "string",
+            "format": "uri"
+        },
+        "logo": {
+            "type": "string",
+            "format": "uri"
+        },
+        "currency": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "check_in_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "check_out_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "early_check_in_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "late_check_out_time": {
+            "type": "string",
+            "format": "time"
+        },
+        "time_zone": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "time_formate": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "date_format": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "date_time_format": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "address": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "city": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "state": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "zip_code": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "country": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "latitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "longitude": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "website": {
+            "type": "string",
+            "maxLength": 2000,
+            "format": "uri"
+        },
+        "map_location_url": {
+            "type": "string",
+            "maxLength": 2000,
+            "format": "uri"
+        },
+        "front_desk_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "whatsapp_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "phone_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "sms_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "sms_number_iso": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "manager_email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 250
+        },
+        "manager_name": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "manager_number": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "total_rooms": {
+            "type": "integer"
+        },
+        "wifi_password": {
+            "type": "string",
+            "maxLength": 30
+        },
+        "g_business_detail": {
+            "type": "object",
+            "default": {}
+        },
+        "g_place_id": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "g_rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+        },
+        "notes": {
+            "type": "string"
+        },
+        "is_active": {
+            "type": "boolean"
+        },
+        "is_email_service": {
+            "type": "boolean"
+        },
+        "is_sms_service": {
+            "type": "boolean"
+        },
+        "is_gxp_app_service": {
+            "type": "boolean"
+        },
+        "is_mobile_key_support": {
+            "type": "boolean"
+        },
+        "is_pms_connection": {
+            "type": "boolean"
+        },
+        "hotel_domain": {
+            "type": "string",
+            "maxLength": 50
+        }
+    },
+    "required": [
+        "brand_id",
+        "hotel_name",
+        "property_code",
+        "email",
+        "gxp_app_theme_color",
+        "currency",
+        "check_in_time",
+        "check_out_time",
+        "early_check_in_time",
+        "late_check_out_time",
+        "time_zone",
+        "time_formate",
+        "date_format",
+        "date_time_format",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "country",
+        "latitude",
+        "longitude",
+        "map_location_url",
+        "front_desk_number",
+        "sms_number_iso",
+        "total_rooms",
+        "g_business_detail",
+        "g_rating",
+        "is_active",
+        "is_email_service",
+        "is_sms_service",
+        "is_gxp_app_service",
+        "is_mobile_key_support",
+        "is_pms_connection"
+    ]
+}

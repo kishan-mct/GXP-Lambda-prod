@@ -105,7 +105,42 @@ functions:
           method: delete
           cors: ${self:custom.corsConfig}
           authorizer: ${self:custom.authorizerConfig}
-
+  
+  # hotel-hotel
+  hotelListCreate:
+    handler: hotel.hotel.hotelListCreate
+    events:
+      - http:
+          path: hotel/hotel
+          method: get
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+      - http:
+          path: hotel/hotel
+          method: post
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/create_hotel.json)}
+    
+  hotelUpdateDestroy:
+    handler: hotel.hotel.hotelUpdateDestroy
+    events:
+      - http:
+          path: hotel/hotel/{id}
+          method: patch
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+          request:
+            schemas:
+              application/json: ${file(../models/hotel/update_hotel.json)}
+      - http:
+          path: hotel/hotel/{id}
+          method: delete
+          cors: ${self:custom.corsConfig}
+          authorizer: ${self:custom.authorizerConfig}
+  
   # hotel - brand
   hotelBrandlist:
     handler: hotel.hotel_brand.hotelBrandlist

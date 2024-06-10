@@ -21,6 +21,8 @@ def roomTypeListCreate(event, context):
             page_size = multi_value_qp.pop('page_size', [None])[0]
             page_number = multi_value_qp.pop('page_number', [1])[0]
             get_columns = multi_value_qp.pop('column', "*")
+            order_by = multi_value_qp.pop('order_by', ["roomtype_name"])[0]
+
 
             filters = {k: v[0] for k, v in multi_value_qp.items() if k not in ('page_size', 'page_number', 'column')}
             print("filters",filters)
@@ -29,7 +31,7 @@ def roomTypeListCreate(event, context):
                 id = multi_value_qp.pop('id')[0]
                 query_result = gxp_db.get_query("room_roomtype", get_columns, condition="id=%s", params=(id,))
             else:
-                 query_result = filter_execute_query("room_roomtype", get_columns, filters, page_size, page_number)
+                 query_result = filter_execute_query("room_roomtype", get_columns, filters, page_size, page_number,order_by)
                  print("query_result",query_result)
 
         elif http_method == 'POST':

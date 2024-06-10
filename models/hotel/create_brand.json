@@ -25,8 +25,8 @@
       "format": "uri"
     },
     "logo": {
-      "type": "string",
-      "format": "uri"
+      "type": "string"
+      
     },
     "membership_reward_image": {
       "type": "string",

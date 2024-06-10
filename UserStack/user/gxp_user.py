@@ -6,7 +6,6 @@ from passlib.hash import pbkdf2_sha256
 from utils.authentication import IsSuperAdmin
 from utils.db_operations import DBOperations
 from utils.common_functions import json_serializer, convert_empty_strings_to_none, string_convert_to_list
-
 gxp_db = DBOperations("gxp-dev")
 
 user_detail_column = ["id", "first_name", "last_name", "email", "mobile", "mobile_iso", "is_active", "date_joined", "gender",
@@ -88,7 +87,13 @@ def gxpUserListCreateUpdateDestroy(event, context):
                     query_result["data"]["user_grouppermission"] = string_convert_to_list(query_result["data"].pop("group_ids"))
             else:
                 query_result = gxp_db.select_query("users_user", get_columns, condition=condition, params=parameter, order_by=order_by, 
-                                                page_size=page_size, page_number=page_number)
+                                            page_size=page_size, page_number=page_number)
+                if query_result.get("data"):
+                    from utils.s3_operations import S3Operations
+                    s3_operations = S3Operations()
+                    user_profiles = query_result["data"]
+                    [profile.update({"profile_picture": s3_operations.get_presigned_urls([profile["profile_picture"]])[0]}) for profile in user_profiles if profile.get("profile_picture")]
+
 
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
