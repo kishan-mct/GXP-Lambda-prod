@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "BuildingCreate",
+    "type": "object",
+    "properties": {
+        "building_name": {
+            "type": "string",
+            "maxLength": 200
+        },
+        "short_name": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "images": {
+            "type": "string"
+        },
+        "total_floor": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "total_room": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "is_active": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "building_name",
+        "short_name",
+        "total_floor",
+        "total_room",
+        "is_active"
+    ],
+    "additionalProperties": false
+}

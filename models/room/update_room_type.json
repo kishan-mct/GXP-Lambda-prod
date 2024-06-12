@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RoomtypeCreate",
+    "type": "object",
+    "properties": {
+        "roomtype_name": {
+            "type": "string",
+            "maxLength": 200
+        },
+        "short_name": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "images": {
+            "type": "object",
+            "default": {}
+        },
+        "total_room": {
+            "type": "integer"
+        },
+        "room_size": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 9999.99
+        },
+        "std_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 9999.99
+        },
+        "kiosk_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 9999.99
+        },
+        "max_adult": {
+            "type": "integer"
+        },
+        "max_children": {
+            "type": "integer"
+        },
+        "features": {
+            "type": "object",
+            "default": {}
+        },
+        "is_enable_ota": {
+            "type": "boolean"
+        },
+        "is_enable_web": {
+            "type": "boolean"
+        },
+        "is_enable_kiosk": {
+            "type": "boolean"
+        },
+        "is_active": {
+            "type": "boolean"
+        },
+        "hk_stay_over_credit": {
+            "type": "integer"
+        },
+        "hk_stay_over_duration": {
+            "type": "string"
+        },
+        "hk_check_out_credit": {
+            "type": "integer"
+        },
+        "hk_check_out_duration": {
+            "type": "string"
+        },
+        "priority_order": {
+            "type": "integer"
+        }
+    },
+    "additionalProperties": false
+}

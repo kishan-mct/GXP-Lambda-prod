@@ -39,7 +39,6 @@ def hotelListCreate(event, context):
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
             g_business_detail = request_body.get('g_business_detail', {})
 
-            print(request_body)
     
             request_body["id"] = str(uuid.uuid4())
             request_body["created_by"] = user_data["email"]

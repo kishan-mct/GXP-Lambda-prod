@@ -3,7 +3,7 @@ import uuid
 import sys
 
 from utils.db_operations import DBOperations
-from utils.filter import filter_execute_query
+from utils.sql_query_filter import get_condition_and_params
 from utils.common_functions import json_serializer, convert_empty_strings_to_none
 
 gxp_db = DBOperations("gxp-dev")
@@ -13,7 +13,7 @@ def roomTypeListCreate(event, context):
     query_result = {"status": False, "message": ""}
     http_method = event['httpMethod']
     user_data = json.loads(event['requestContext']['authorizer']['user_data'])
-    print(user_data)
+    hotel_id = user_data["hotel_id"]
 
     try:
         if http_method == 'GET':
@@ -23,22 +23,35 @@ def roomTypeListCreate(event, context):
             get_columns = multi_value_qp.pop('column', "*")
             order_by = multi_value_qp.pop('order_by', ["roomtype_name"])[0]
 
-
-            filters = {k: v[0] for k, v in multi_value_qp.items() if k not in ('page_size', 'page_number', 'column')}
-            print("filters",filters)
+            filters = {k: v[0] for k, v in multi_value_qp.items()}
 
             if 'id' in multi_value_qp:
                 id = multi_value_qp.pop('id')[0]
                 query_result = gxp_db.get_query("room_roomtype", get_columns, condition="id=%s", params=(id,))
             else:
-                 query_result = filter_execute_query("room_roomtype", get_columns, filters, page_size, page_number,order_by)
-                 print("query_result",query_result)
-
+                condition, params = get_condition_and_params(filters)
+                query_result = gxp_db.select_query("room_roomtype", get_columns, condition=condition, params=params,
+                                                   order_by=order_by, page_size=page_size, page_number=page_number)
+                
         elif http_method == 'POST':
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
+            roomtype_name = request_body.get("roomtype_name",None)
+            short_name = request_body.get("short_name",None)
+            features = request_body.get("features",{})    
 
+            exists_result = gxp_db.get_query("room_roomtype","*",
+            condition="hotel_id = %s AND (LOWER(roomtype_name) = LOWER(%s) OR LOWER(short_name) = LOWER(%s))",params=(hotel_id, roomtype_name, short_name)).get("data")
+        
+            if exists_result:
+                if exists_result['roomtype_name'].lower() == roomtype_name.lower():
+                    query_result["message"] = f"roomtype {roomtype_name} name already exists"
+                elif exists_result['short_name'].lower() == short_name.lower():
+                    query_result["message"] = f"roomtype short {short_name} name already exists"
+                return query_result
+                    
             request_body["id"] = str(uuid.uuid4())
             request_body["hotel_id"] = user_data["hotel_id"]
+            request_body["features"] = json.dumps(features)
             request_body["created_by"] = user_data["email"]
 
             query_result = gxp_db.insert_query("room_roomtype", request_body)
@@ -68,17 +81,37 @@ def roomTypeUpdateDestroy(event, context):
     query_result = {"status": False, "message": ""}
     http_method = event['httpMethod']
     user_data = json.loads(event['requestContext']['authorizer']['user_data'])
+    hotel_id = user_data["hotel_id"]
 
     try:
-        room_type_id = event['pathParameters']['id']
         if http_method == 'PATCH':
+            room_type_id = event['pathParameters']['id']
             request_body = convert_empty_strings_to_none(json.loads(event['body']))
+            roomtype_name = request_body.get('roomtype_name',None)
+            short_name = request_body.get('short_name',None)
+            proceed_with_execution = True
+            
+            if  roomtype_name:
+                exists_result = gxp_db.get_query("room_roomtype","*",condition="hotel_id = %s AND LOWER(roomtype_name) = LOWER(%s) AND id != %s",
+                    params=(hotel_id, roomtype_name, room_type_id))
+                if exists_result.get("data",{}):
+                    query_result["status"] = False
+                    query_result["message"] = f"roomtype {roomtype_name} name already exists"
+                    proceed_with_execution = False
 
-            request_body["updated_by"] = user_data["email"]
-
-            query_result = gxp_db.update_query("room_roomtype", request_body, condition="id=%s", params=(room_type_id,))
-            if query_result['status']:
-                query_result = gxp_db.get_query("room_roomtype", "*", condition="id=%s", params=(room_type_id,))
+            if  short_name:
+                exists_result = gxp_db.get_query("room_roomtype","*",condition="hotel_id = %s AND LOWER(short_name) = LOWER(%s) AND id != %s",
+                    params=(hotel_id, short_name, room_type_id))
+                if exists_result.get("data",{}):
+                    query_result["status"] = False
+                    query_result["message"] = f"short {short_name} name already exists"
+                    proceed_with_execution = False
+            
+            if proceed_with_execution:
+                request_body["updated_by"] = user_data["email"]
+                query_result = gxp_db.update_query("room_roomtype", request_body, condition="id=%s", params=(room_type_id,))
+                if query_result['status']:
+                   query_result = gxp_db.get_query("room_roomtype", "*", condition="id=%s", params=(room_type_id,))
 
         elif http_method == 'DELETE':
                 query_result = gxp_db.delete_query("room_roomtype", condition="id=%s", params=(room_type_id,))  
@@ -100,16 +133,3 @@ def roomTypeUpdateDestroy(event, context):
             }
         }
     
-
-
-#  if '__' in field:
-#             table_alias, field = field.split('__', 1)
-#             if table_alias not in joined_tables:
-#                 if table_alias == 'hotel_hotel':
-#                     joins.append("JOIN hotel_hotel ON room_roomtype.hotel_id = hotel_hotel.id")
-#                 else:
-#                     joins.append(f"JOIN {table_alias} ON room_roomtype.{table_alias}_id = {table_alias}.id")
-#                 joined_tables.add(table_alias)
-#             sql_field = f"{table_alias}.{field}"
-#         else:
-#             sql_field = field
