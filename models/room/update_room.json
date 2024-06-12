@@ -1,26 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Room",
+    "title": "RoomUPdate",
     "type": "object",
     "properties": {
-        "id": {
+        "room_type_id": {
             "type": "string",
             "format": "uuid"
         },
-        "hotel": {
-            "type": "string"
-        },
-        "building": {
-            "type": "string"
-        },
-        "floor": {
-            "type": "string"
-        },
-        "room_type": {
-            "type": "string"
-        },
-        "booking": {
-            "type": "string"
+        "booking_id": {
+            "type": "string",
+            "format": "uuid"
         },
         "room_number": {
             "type": "string",
@@ -30,8 +19,9 @@
             "type": "string",
             "maxLength": 255
         },
-        "hd_qrcode": {
-            "type": "string"
+        "is_comman": {
+            "type": "boolean",
+            "default": false
         },
         "is_accessible": {
             "type": "boolean",
@@ -58,17 +48,5 @@
             "maxLength": 5
         }
     },
-    "required": [
-        "hotel",
-        "building",
-        "floor",
-        "room_type",
-        "room_number",
-        "is_accessible",
-        "is_pet_friendly",
-        "is_smoking",
-        "occupancy_status",
-        "hk_status"
-    ],  "additionalProperties":false
-
+    "additionalProperties": false
 }

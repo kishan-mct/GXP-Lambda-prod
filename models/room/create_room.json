@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RoomCreate",
+    "type": "object",
+    "properties": {
+        "building_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "floor_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "room_type_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "booking_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "room_number": {
+            "type": "string",
+            "maxLength": 250
+        },
+        "connect_room_number": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "is_comman": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_accessible": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_pet_friendly": {
+            "type": "boolean",
+            "default": false
+        },
+        "is_smoking": {
+            "type": "boolean",
+            "default": false
+        },
+        "occupancy_status": {
+            "type": "string",
+            "maxLength": 5
+        },
+        "occupancy_reason": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "hk_status": {
+            "type": "string",
+            "maxLength": 5
+        }
+    },
+    "required": [
+        "building_id",
+        "floor_id",
+        "room_type_id",
+        "room_number",
+        "is_comman",
+        "is_accessible",
+        "is_pet_friendly",
+        "is_smoking",
+        "occupancy_status",
+        "hk_status"
+    ],
+    "additionalProperties": false
+}
