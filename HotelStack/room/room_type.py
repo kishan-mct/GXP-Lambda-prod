@@ -40,9 +40,9 @@ def roomTypeListCreate(event, context):
             features = request_body.get("features",{})    
 
             exists_result = gxp_db.get_query("room_roomtype","*",
-            condition="hotel_id = %s AND (LOWER(roomtype_name) = LOWER(%s) OR LOWER(short_name) = LOWER(%s))",params=(hotel_id, roomtype_name, short_name)).get("data")
+            condition="hotel_id = %s AND (LOWER(roomtype_name) = LOWER(%s) OR LOWER(short_name) = LOWER(%s))",params=(hotel_id, roomtype_name, short_name))
         
-            if exists_result:
+            if exists_result.get('data',{}):
                 if exists_result['roomtype_name'].lower() == roomtype_name.lower():
                     query_result["message"] = f"roomtype {roomtype_name} name already exists"
                 elif exists_result['short_name'].lower() == short_name.lower():

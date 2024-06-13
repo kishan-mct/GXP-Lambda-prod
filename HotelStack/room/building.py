@@ -3,10 +3,12 @@ import uuid
 import sys
 
 from utils.db_operations import DBOperations
-from utils.sql_query_filter import get_condition_and_params
 from utils.common_functions import json_serializer, convert_empty_strings_to_none
+from utils.s3_operations import S3Operations
+from utils.sql_query_filter import get_condition_and_params
 
 gxp_db = DBOperations("gxp-dev")
+s3_operations = S3Operations()
 
 def buildingListCreate(event, context):
     status_code = 200
@@ -28,6 +30,7 @@ def buildingListCreate(event, context):
             if 'id' in multi_value_qp:
                 id = multi_value_qp.pop('id')[0]
                 query_result = gxp_db.get_query("room_building", get_columns, condition="id=%s", params=(id,))
+
             else:
                 condition, params = get_condition_and_params(filters)
                 query_result = gxp_db.select_query("room_building", get_columns, condition=condition, params=params,
