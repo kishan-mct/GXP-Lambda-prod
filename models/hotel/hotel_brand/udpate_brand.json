@@ -1,0 +1,82 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "HotelBrandUpdate",
+	"type": "object",
+	"properties": {
+	  "name": {
+		"type": "string",
+		"maxLength": 255
+	  },
+	  "email": {
+		"type": "string",
+		"format": "email",
+		"maxLength": 255
+	  },
+	  "mobile": {
+		"type": "string",
+		"maxLength": 20
+	  },
+	  "favicon_icon": {
+		"type": "string"
+	  },
+	  "logo": {
+		"type": "string"
+	  },
+	  "membership_reward_image": {
+		"type": "string"
+	  },
+	  "membership_reward_tnc": {
+		"type": "string"
+	  },
+	  "rewards_website_url": {
+		"type": "string"
+	  },
+	  "rewards_website_join_url": {
+		"type": "string"
+	  },
+	  "is_active": {
+		"type": "boolean"
+	  },
+	  "address": {
+		"type": "string",
+		"maxLength": 20
+	  },
+	  "city": {
+		"type": "string",
+		"maxLength": 255
+	  },
+	  "state": {
+		"type": "string",
+		"maxLength": 255
+	  },
+	  "country": {
+		"type": "string",
+		"maxLength": 255
+	  },
+	  "zip_code": {
+		"type": "string",
+		"maxLength": 20
+	  },
+	  "website_url": {
+		"type": "string",
+		"format": "uri"
+	  },
+	  "contact_name": {
+		"type": "string",
+		"maxLength": 255
+	  },
+	  "contact_email": {
+		"type": "string",
+		"format": "email",
+		"maxLength": 255
+	  },
+	  "contact_phone": {
+		"type": "string",
+		"maxLength": 20
+	  },
+	  "number_of_hotels": {
+		"type": "integer"
+	  }
+	},
+	"additionalProperties": false
+}

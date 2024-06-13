@@ -94,7 +94,7 @@ def roomUpdateDestroy(event, context):
                     query_result["status"] = False
                     query_result["message"] = f"Room number {room_number} already exists"
                     proceed_with_execution = False
-            
+             
             if proceed_with_execution:
                 request_body["updated_by"] = user_data["email"]
                 query_result = gxp_db.update_query("room_room", request_body, condition="id=%s", params=(room_id,))

@@ -40,9 +40,9 @@ def floorListCreate(event, context):
                 short_name = request_body.get('short_name',None)
                 
                 exists_result = gxp_db.get_query("room_floor","*",
-                condition="hotel_id = %s AND (LOWER(floor_name) = LOWER(%s) OR LOWER(short_name) = LOWER(%s))",params=(hotel_id, floor_name, short_name)).get("data")
+                condition="hotel_id = %s AND (LOWER(floor_name) = LOWER(%s) OR LOWER(short_name) = LOWER(%s))",params=(hotel_id, floor_name, short_name))
             
-                if exists_result:
+                if exists_result.get('data',{}):
                     if exists_result['floor_name'].lower() == floor_name.lower():
                         query_result["message"] = "floor name already exists"
                     elif exists_result['short_name'].lower() == short_name.lower():
